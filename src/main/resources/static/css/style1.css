@@ -1,0 +1,48 @@
+@font-face {
+    font-family: Montserrat;
+    src: url(fonts/Montserrat/static/Montserrat-MediumItalic.ttf);
+}
+
+.container {
+	padding: 50px 0;
+	border-radius: 8px;
+	margin: 50px auto;
+	background-color: buttonfield;
+	max-width: 600px;
+}
+
+.select {
+	height: 60px;
+	max-width: 400px;
+	margin: 20px auto;
+	line-height: 60px;
+	text-align: center;
+}
+
+a {
+	display: block;
+	text-decoration: none;
+	color: #000;
+	font-size: 20px;
+	font-family: 'Roboto Flex', sans-serif;
+	border: 1px solid #000;
+	border-radius: 8px;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+
+a:hover {
+	color: #0d6efd;
+	border: 1px solid #0d6efd;
+	box-shadow: 0 0 5px 2px #0d6efd;
+}
+
+a:active {
+	border-style: groove;
+    color: #000;
+    border: 2px solid #0d6efd;
+    box-shadow: none;
+}
+
+
+
+

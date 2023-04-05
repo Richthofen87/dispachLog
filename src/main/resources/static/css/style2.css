@@ -1,0 +1,91 @@
+@font-face {
+    font-family: Montserrat;
+    src: url(fonts/Montserrat/static/Montserrat-MediumItalic.ttf);
+}
+
+.container {
+    padding: 50px 0;
+    margin: 50px auto 50px auto;
+    max-width: 600px;
+    font-family: 'Roboto Flex', sans-serif;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+label, input {
+    height: 100%;
+}
+
+.row {
+    width: 90%;
+    height: 35px;
+    background-color: rgba(0, 0, 0, 0.3);
+    font-size: 20px;
+    padding-left: 10px;
+    margin: 0 auto 10px auto;
+    color: #000;
+    border-radius: 6px;
+    line-height: 35px;
+}
+
+.row > select,
+.row > input:nth-child(2) {
+    border-radius: 0 6px 6px 0;
+    padding-left: 10px;
+    border: 1px solid #000;
+    font-weight: 400;
+}
+
+.title {
+    background: none;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    padding: 0;
+    margin-top: 20px;
+    background: none;
+}
+
+.row > input:nth-child(2).reset {
+    border-radius: 6px;
+    padding: 0;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+}
+
+.row.buttons * {
+    text-align: center;
+    width: 120px;
+    height: 100%;
+    padding: 0;
+    font-size: 16px;
+    color: #000;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    border: 1px solid #000;
+}
+
+.reset {
+    margin: 0 10px;
+}
+
+.button:hover,
+.row > input:nth-child(2).reset:hover {
+    color: #0d6efd;
+    border: 1px solid #0d6efd;
+    box-shadow: 0 0 3px 1px #0d6efd;
+}
+
+.button:active,
+.row > input:nth-child(2).reset:active {
+    border-style: groove;
+    color: #000;
+    border: 2px solid #0d6efd;
+    box-shadow: none;
+}

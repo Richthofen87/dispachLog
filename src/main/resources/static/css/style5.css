@@ -1,0 +1,93 @@
+.container {
+    font-size: 14px;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 600;
+    max-width: 1584px;
+}
+
+.container .col-10:nth-child(1) {
+    border-right: 3px solid #2ebaee;
+}
+
+div.part2 {
+	margin: 0;
+}
+
+.row_table2 {
+	margin-right: -12px;
+}
+
+.textField_trips {
+	width: 100%;
+}
+
+.table2_1 td,
+.table2 td {
+	width: 82.2px;
+}
+
+.table2_1 td.subdivision,
+.table2 td.subdivision {
+	width: 120px;
+}
+
+.additional_information_textField {
+	max-width: 638px;
+}
+
+.padding-left-0 {
+	padding-left: 0px;
+}
+
+p.trips,
+input[type="button"],
+a[name="back"] {
+    margin: 5px 0;
+}
+
+.textField_table3 {
+	width: 614px;
+}
+
+input.save_record {
+	margin-top: 31px;
+}
+
+a[name="back"] {
+    color: #000;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    height: 25px;
+    line-height: 25px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    text-align: center;
+    background-color: buttonface;
+    font-weight: 400;
+}
+
+a[name="back"]:hover {
+     color: #0d6efd;
+    border: 1px solid #0d6efd;
+    box-shadow: 0 0 3px 1px #0d6efd;
+}
+
+a[name="back"]:active {
+    border-style: groove;
+    color: #000;
+    border: 2px solid #0d6efd;
+    line-height: 23px;
+    box-shadow: none;
+}
+
+div.header {
+    background-color: #2ebaee;
+    margin: 0 0 0 -12px;
+    text-align: left;
+    padding-left: 12px;
+}
+
+input.save_record {
+    margin-top: 10px;
+}

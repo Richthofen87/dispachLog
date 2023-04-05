@@ -1,0 +1,34 @@
+textarea[name="primary message"] {
+    margin-top: 10px;
+    height: 70%;
+}
+
+div.right_side {
+    border-color: #E58F65;
+}
+
+p.trips {
+    margin-top: 30px;
+}
+
+textarea.additional_information_textField,
+p.additional_information {
+    margin-left: 0;
+}
+
+/*div.buttons a:hover,
+input[type="button"]:hover {
+    box-shadow: 0 0 4px 1px #E58F65;
+}
+
+div.buttons a:active,
+input[type="button"]:active {
+    border: 1px solid #E58F65;
+    color: #000;
+    box-shadow: none;
+}
+*/
+.page_header {
+    background-color: #E58F65;
+}
+

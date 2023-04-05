@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>НОВЫЙ ВЫЕЗД В ОБЛАСТИ</title>
+	<link rel="shortcut icon" type="image/svg" href="img/favicon.ico"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style3.css">
+	<link rel="stylesheet" type="text/css" href="css/style5.css">
+	<link rel="stylesheet" type="text/css" href="css/style6.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-10">
+				<div class="row gx-4">
+					<div class="col-6 top_left">
+						<div class="row gx-2">
+							<div class="col-3">
+								<p>Дата и время</p>
+							</div>
+							<div class="col-3">
+								<p>Населённый пункт</p>
+							</div>
+							<div class="col-6">
+								<p>Адрес</p>
+							</div>
+							<div class="col-3">
+								<input type="datetime-local" name="datetime">
+							</div>
+							<div class="col-3">
+								<select id="locality">
+									<option selected="true"></option>
+									<option></option>
+									<option></option>
+								</select>
+							</div>
+							<div class="col-6">
+								<input type="text" name="category">
+							</div>
+							<div class="col-6">
+								<p>Категория выезда</p>
+							</div>
+							<div class="col-6">
+								<p>Заявитель</p>
+							</div>
+							<div class="col-6">
+								<input type="text" name="adress">
+							</div>
+							<div class="col-6">
+								<input type="text" name="aplicant">
+							</div>
+							<div class="col-6">
+								<p>Первичное сообщение</p>
+							</div>
+							<div class="col-6">
+								<p>Кто принял</p>
+							</div>
+							<div class="col-6">
+								<textarea class="" name="text"></textarea>
+							</div>
+							<div class="col-6">
+								<input type="text" name="who took">
+							</div>
+						</div>
+					</div>
+					<div class="col-6 padding-left-0">
+						<div class="row part2">
+							<div class="col">
+								<div class="col-12">
+									<p class="response_time">Время реагирования</p>
+								</div>
+								<table class="table1">
+									<thead>
+										<tr>
+											<td>
+												<p>Время сообщ.</p>
+											</td>
+											<td>
+												<p>Время выезда</p>
+											</td>
+											<td>
+												<p>Время приб.</p>
+											</td>
+											<td>
+												<p>1-й ствол</p>
+											</td>
+											<td>
+												<p>ЛОК</p>
+											</td>
+											<td>
+												<p>ЛОГ</p>
+											</td>
+											<td>
+												<p>Полная ликв.</p>
+											</td>
+											<td>
+												<p>Время возвр.</p>
+											</td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><input type="time" name=""></td>
+											<td><input type="time" name=""></td>
+											<td><input type="time" name=""></td>
+											<td><input type="time" name=""></td>
+											<td><input type="time" name=""></td>
+											<td><input type="time" name=""></td>
+											<td><input type="time" name=""></td>
+											<td><input type="time" name=""></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-7">
+								<p class="rtp_header">РТП</p>
+							</div>
+							<div class="col-7 rtp">
+								<div class="textField_rtp" name="rtp">
+									<table>
+										<tr>
+											<td name="number"><input type="text" value="1"></td>
+											<td name="job_title"><input type="text"></td>
+											<td name="fio"><input type="text"></td>
+										</tr>
+										<tr>
+											<td name="number"><input type="text" value="2"></td>
+											<td><input type="text" name=""></td>
+											<td><input type="text" name=""></td>
+										</tr>
+										<tr>
+											<td name="number"><input type="text" value="3"></td>
+											<td><input type="text" name=""></td>
+											<td><input type="text" name=""></td>
+										</tr>
+										<tr>
+											<td name="number"><input type="text" value="4"></td>
+											<td><input type="text" name=""></td>
+											<td><input type="text" name=""></td>
+										</tr>
+										<tr>
+											<td name="number"><input type="text" value="5"></td>
+											<td><input type="text" name=""></td>
+											<td><input type="text" name=""></td>
+										</tr>
+									</table>
+								</div>
+							</div>
+							<div class="col-3" name="departure_area">
+								<div class="row">
+									<div class="col-12">
+										<p class="departure_area">Район выезда</p>
+									</div>
+									<div class="col-12">
+										<select name="departure_area">
+											<option></option>
+											<option>СПСЧ</option>
+											<option>ПСЧ-1</option>
+											<option>ПСЧ-2</option>
+											<option>ПСЧ-20</option>
+											<option>ОППСЧ-20</option>
+											<option>ПЧ-12</option>
+											<option>ПЧ-8</option>
+											<option>ПЧ-21</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="row">
+									<div class="col-6 gx-0">
+										<p class="fire_rank">Ранг</p>
+									</div>
+									<div class="col-6 gx-0" name="fire_rank">
+										<select name="fire_rank">
+											<option>1</option>
+											<option>1 БИС</option>
+											<option>2</option>
+											<option>3</option>
+										</select>
+									</div>
+									<div class="col-6 gx-0">
+										<p class="firefighting_headquarters">Штаб</p>
+									</div>
+									<div class="col-6 gx-0">
+										<input type="checkbox" name="firefighting_headquarters">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12">
+					<p class="trips">Выезжали</p>
+				</div>
+				<div class="row">
+					<div class="col-12 table2_col">
+						<table class="table2">
+							<thead>
+								<tr>
+									<td  class="subdivision" rowspan="2">
+										<p>Подразделение</p>
+									</td>
+									<td rowspan="2">
+										<p >Отд.</p>
+									</td>
+									<td rowspan="2">
+										<p>Тип ПА</p>
+									</td>
+									<td rowspan="2">
+										<p>Время выезда</p>
+									</td>
+									<td rowspan="2">
+										<p>Время приб.</p>
+									</td>
+									<td rowspan="2">
+										<p>Время возвр.</p>
+									</td>
+									<td colspan="3">
+										<p>Водяные стволы</p>
+									</td>
+									<td colspan="3">
+										<p>Пенные стволы</p>
+									</td>
+									<td rowspan="2">
+										<p>Звено гдзс</p>
+									</td>
+									<td rowspan="2">
+										<p>Работа ГДЗС, мин</p>
+									</td>
+									<td rowspan="2">
+										<p>Г/н ПА</p>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<p>А</p>
+									</td>
+									<td>
+										<p>Б</p>
+									</td>
+									<td>
+										<p>ЛС</p>
+									</td>
+									<td>
+										<p>Пурга</p>
+									</td>
+									<td>
+										<p>ГПС</p>
+									</td>
+									<td>
+										<p>СВП</p>
+									</td>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+				<div class="textField_trips">
+					<table class="table2_1">
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+						<tr>
+							<td class="subdivision"><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+							<td><input type="text" name=""></td>
+						</tr>
+					</table>
+				</div>
+				<div class="row">
+					<div class="col-6">
+						<div class="row">
+							<div class="col-12">
+								<p class="table3_header">Сообщено</p>
+							</div>
+							<div class="col-12">
+								<table class="table3">
+									<tbody>
+										<td class="to_whom">Кому</td>
+										<td class="message_time">Время сообщ.</td>
+										<td class="who_arrived">Кто прибыл</td>
+										<td class="arrival_time">Время приб.</td>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-12">
+								<div class="textField_table3">
+									<table class="table4">
+										<tbody>
+											<tr>
+												<td class="job_title"><input type="text" name=""></td>
+												<td class="fio"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+												<td class="who_arrived"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+											</tr>
+											<tr>
+												<td class="job_title"><input type="text" name=""></td>
+												<td class="fio"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+												<td class="who_arrived"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+
+											</tr>
+											<tr>
+												<td class="job_title"><input type="text" name=""></td>
+												<td class="fio"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+												<td class="who_arrived"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+											</tr>
+											<tr>
+												<td class="job_title"><input type="text" name=""></td>
+												<td class="fio"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+												<td class="who_arrived"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+											</tr>
+											<tr>
+												<td class="job_title"><input type="text" name=""></td>
+												<td class="fio"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+												<td class="who_arrived"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+											</tr>
+											<tr>
+												<td class="job_title"><input type="text" name=""></td>
+												<td class="fio"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+												<td class="who_arrived"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+											</tr>
+											<tr>
+												<td class="job_title"><input type="text" name=""></td>
+												<td class="fio"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+												<td class="who_arrived"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+											</tr>
+											<tr>
+												<td class="job_title"><input type="text" name=""></td>
+												<td class="fio"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+												<td class="who_arrived"><input type="text" name=""></td>
+												<td><input type="time" name=""></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="col-12">
+							<p class="description_header">Описание</p>
+						</div>
+						<div class="col-12 description_col">
+							<textarea class="description_textField" name="text" id="" cols="30" rows="7"></textarea>
+						</div>
+						<div class="col-12">
+							<p class="radio_exchange_header">Радиообмен</p>
+						</div>
+						<div class="col-12">
+							<textarea class="radio_exchange_textField" name="text" id="" cols="30" rows="4"></textarea>
+						</div>
+					</div>
+					<div class="col-6" name="bottom-right">
+						<div class="row" name="bottom-right">
+							<div class="col-6">
+								<table class="table5">
+									<thead>
+										<td class="contents"></td>
+										<td>Всего, чел.</td>
+										<td>В т. ч. детей</td>
+									</thead>
+									<tbody>
+										<tr>
+											<td class="content">Спасено</td>
+											<td><input type="text" name=""></td>
+											<td><input type="text" name=""></td>
+										</tr>
+										<tr>
+											<td class="content">Травмировано</td>
+											<td><input type="text" name=""></td>
+											<td><input type="text" name=""></td>
+										</tr>
+										<tr>
+											<td class="content">Эвакуировано</td>
+											<td><input type="text" name=""></td>
+											<td><input type="text" name=""></td>
+										</tr>
+										<tr>
+											<td class="content">Погибло</td>
+											<td><input type="text" name=""></td>
+											<td><input type="text" name=""></td>
+										</tr>
+										<tr>
+											<td class="content">Погибло до прибытия</td>
+											<td><input type="text" name=""></td>
+											<td><input type="text" name=""></td>
+										</tr>
+										<tr>
+											<td class="content">Деблокировано</td>
+											<td><input type="text" name=""></td>
+											<td><input type="text" name=""></td>
+										</tr>
+										<tr>
+											<td class="content" colspan="2">Сотрудники/работники ПО</td>
+										</tr>
+										<tr>
+											<td class="content">Травмировано</td>
+											<td><input type="text" name=""></td>
+										</tr>
+										<tr>
+											<td class="content">Погибло</td>
+											<td><input type="text" name=""></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-6 table6_col">
+								<table class="table6">
+									<tbody>
+										<tr>
+											<td colspan="2">Чем потушено</td>
+										</tr>
+										<tr>
+											<td class="content">Подручными ср/ми</td>
+											<td><input type="radio" name="extinguished"></td>
+										</tr>
+										<tr>
+											<td class="content">От АЦ</td>
+											<td><input type="radio" name="extinguished" checked></td>
+										</tr>
+										<tr>
+											<td class="content">Источник НППВ</td>
+											<td>
+												<input type="text" name="" list="water_source">
+												<datalist id="water_source">
+													<option>ПГ</option>
+													<option>ПВ</option>
+													<option>Иное</option>
+												</datalist>
+											</td>
+										</tr>
+										<tr>
+											<td class="content">Подача воды от ИНППВ</td>
+											<td>
+												<input type="text" name="" list="water supply">
+												<datalist id="water supply">
+													<option>Подвозом</option>
+													<option>Вперекачку</option>
+												</datalist>
+											</td>
+										</tr>
+										<tr>
+											<td class="content">Слито воды, л.</td>
+											<td><input type="text" name=""></td>
+										</tr>
+										<tr>
+											<td class="content">Слито ПО, л.</td>
+											<td><input type="text" name=""></td>
+										</tr>
+										<tr>
+											<td colspan="2">Кем потушено</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<input type="text" name="" list="who_extinguished">
+												<datalist id="who_extinguished">
+													<option>Сотрудниками/работниками ГПС</option>
+													<option>Работниками ВГСЧ</option>
+													<option>Сотрудниками/работниками др. видов ПО</option>
+													<option>Сотрудниками/работниками иных АСФ</option>
+													<option>Населением</option>
+												</datalist>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-6">
+								<p class="header">Причина пожара</p>
+							</div>
+							<div class="col-6">
+								<p class="header guilty_person">Виновное лицо</p>
+							</div>
+							<div class="col-6">
+								<input class="cause_of_the_fire" type="text" name="">
+							</div>
+							<div class="col-6">
+								<input class="guilty_person" type="text" name="">
+							</div>
+							<div class="col-6">
+								<p class="header">Объект</p>
+							</div>
+							<div class="col-6">
+								<p class="header damage">Ущерб</p>
+							</div>
+							<div class="col-6">
+								<input class="fire_object" type="text" name="">
+							</div>
+							<div class="col-6">
+								<input class="damage" type="text" name="">
+							</div>
+							<div class="col-12">
+								<p class="additional_information">Дополнительная информация</p>
+							</div>
+							<div class="col-12">
+								<textarea class="additional_information_textField" name="text" id="" rows="2"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-2">
+				<div class="row">
+					<div class="col-12">
+						<div class="header">
+							<h5>НОВЫЙ ВЫЕЗД <br>ПО ТРЕВОГЕ В ОБЛАСТИ</h5>
+						</div>
+					</div>
+					<div class="col-8">
+						<input class="save_record" type="button" name="" value="Сохранить запись">
+					</div>
+					<div class="col-8">
+						<input type="button" name="" value="Очистить даннные">
+					</div>
+					<div class="col-8">
+						<a href="Выезды по тревоге в области.html" name="back">Назад</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,415 @@
+@font-face {
+    font-family: Montserrat;
+    src: url(Montserrat-Regular.ttf);
+}
+
+.container-fluid {
+    font-size: 14px;
+    font-family: 'Roboto Flex', sans-serif;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.textField_rtp,
+.textField_trips,
+.textField_table3,
+.textField_trips2 {
+    max-width: 100%;
+    overflow: auto;
+    border: 1px solid #000;
+    padding: 3px 3px 0;
+}
+
+.textField_rtp {
+    max-height: 53px;
+    padding: 0;
+    border-left: none;
+    width: 321px;
+}
+
+.textField_rtp table {
+    margin: 0;
+}
+
+.textField_rtp table td{
+    border-top: none;
+}
+
+.textField_rtp td[name="number"] {
+    width: 20px;
+}
+
+.textField_rtp td[name="number"] input {
+    text-align: center;
+}
+
+.textField_rtp select {
+    border: none;
+}
+
+.textField_table3 {
+    max-height: 128px;
+    border-left: none;
+}
+
+.textField_trips {
+    padding: 0px;
+    max-height: 155px;
+    width: 1162px;
+    border-left: none;
+}
+
+table {
+    margin-top: 20px;
+    text-align: center;
+}
+
+table input {
+    border: none;
+}
+
+table td {
+    border: 1px solid #000;
+}
+
+table p {
+    padding: 0;
+    margin: 0;
+}
+
+.table2 td.subdivision,
+.table2_1 td.subdivision {
+    width: 120px;
+}
+
+.table2 {
+    margin-top: 0;
+}
+
+p.firefighting_headquarters,
+p.fire_rank {
+    display: inline-block;
+    width: 50px;
+}
+
+p.fire_rank {
+    margin: 0;
+}
+
+p.trips {
+    margin: 10px 0 5px;
+}
+
+input[name="fire rank"],
+input[name="firefighting_headquarters"] {
+    width: 40px;
+    margin: 3px 0;
+}
+
+.part2 {
+    width: 614px;
+}
+
+textarea {
+    width: 100%;
+    height: 100%;
+    padding: 4px;
+}
+
+.row_table2 {
+    width: 1280px;
+}
+
+.top_block {
+    max-height: 200px;
+}
+
+.top_left p,
+p.response_time,
+p.rtp_header,
+p[name="records history"] {
+ margin: 5px 0;
+}
+
+p.rtp_header {
+    margin: 19px 0 5px;
+}
+
+.table1,
+.right_side table[name="headers"] {
+    margin-top: 0;
+}
+
+
+.table3_header,
+.description_header,
+.radio_exchange_header,
+.header,
+.additional_information {
+    margin: 5px 0;
+}
+
+.table2_1,
+.table3,
+.table4,
+.description_textField,
+.radio_exchange_textField,
+.additional_information_textField,
+.textField_trips2 table {
+    max-width: 100%;
+    margin: 0;
+}
+
+.table1 td,
+.table2 td,
+.table2_1 td,
+.table3 td,
+.table4 td,
+.right_side td {
+    width: 73px;
+}
+
+.table2 td,
+.table3 td,
+.right_side table[name="headers"] td {
+   border-bottom: none;
+}
+
+.table2_1 td,
+.table4 td,
+.textField_trips2 td {
+    border-top: none;
+}
+
+.table3 .who_arrived,
+.table4 .who_arrived {
+    width: 192.57px;
+}
+
+.table3 .to_whom {
+    width: 254.81px;
+}
+
+.table4 .job_title {
+    width: 86.81px;
+}
+
+.textField_rtp td[name="job_title"] {
+    width: 100px;
+}
+
+.textField_rtp td[name="fio"] {
+    width: 180px;
+}
+
+.table4 .fio {
+    width: 168px;
+}
+
+.textField_table3,
+.textField_trips2 {
+    padding: 0;
+}
+
+.table5 .content,
+.table6 .content {
+    text-align: left;
+    padding-left: 4px;
+}
+
+.table5 .contents {
+    width: 160px;
+}
+
+.table5,
+.table6 {
+    margin-top: 31px;
+    margin-left: 10px;
+}
+
+.table6 {
+    max-width: 100%;
+    margin-left: 0;
+}
+
+.table6 .content {
+    width: 190px;
+}
+
+.table6 td {
+    max-width: 100%;
+}
+
+.header,
+.cause_of_the_fire,
+.fire_object,
+.additional_information,
+.additional_information_textField {
+    margin-left: 10px;
+}
+
+.additional_information_textField {
+    max-width: 615px;
+    height: 60px;
+}
+
+.description_col {
+    max-height: 157px;
+}
+
+.right_side table {
+    max-width: 100%;
+}
+
+.right_side td {
+    height: 25.5px;
+}
+
+.right_side td[name="date"] {
+    width: 73px;
+}
+
+.right_side td[name="time"] {
+    width: 50px;
+}
+
+.right_side td[name="locality"] {
+    width: 80px;
+}
+
+.right_side td[name="category"] {
+    width: 150px;
+}
+
+.right_side td[name="adress"] {
+    width: 250px;
+}
+
+.textField_trips2 {
+    border-left: none;
+    height: 587px;
+}
+
+select,
+input[name="datetime"] {
+    width: 100%;
+    height: 100%;
+}
+
+div[name="departure_area"] {
+    padding-left: 0;
+    margin-right: -30px;
+}
+
+div.rtp {
+    padding-right: 0;
+    margin-right: -5px;
+}
+
+p.departure_area {
+    margin: 0 0 10px 0;
+}
+select[name="departure_area"] {
+    width: 100px;
+}
+
+select[name="fire_rank"] {
+    width: 70px;
+}
+
+div.right_side {
+    border-left: 3px solid #2ebaee;
+    margin-left: -9px;
+    padding-left: 6px;
+    padding-right: 9px;
+}
+
+div.left_side {
+    padding-right: 16px;
+}
+
+div.textField_trips2 table {
+    font-weight: 400;
+}
+
+div.buttons input[type="button"] {
+    margin-top: 20px;
+}
+
+input[type="button"] {
+    color: #000;
+    border: 1px solid #000;
+    border-radius: 3px;
+    padding: 0;
+    height: 25px;
+}
+
+div.buttons a {
+    color: #000;
+    text-decoration: none;
+    display: inline-block;
+    width: 143.48px;
+    height: 25px;
+    line-height: 25px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    margin-top: 20px;
+    text-align: center;
+    background-color: buttonface;
+    font-weight: 400;
+}
+
+div.buttons a:hover,
+input[type="button"]:hover {
+    color: #0d6efd;
+    border: 1px solid #0d6efd;
+    box-shadow: 0 0 3px 1px #0d6efd;
+}
+
+div.buttons a:active,
+input[type="button"]:active {
+    border-style: groove;
+    color: #000;
+    border: 2px solid #0d6efd;
+    line-height: 23px;
+    box-shadow: none;
+}
+
+input[name="firefighting_headquarters"],
+p.firefighting_headquarters {
+    margin: 10px 0 0 0;
+}
+
+input[name="firefighting_headquarters"] {
+    margin: 13px 0 0 0;
+}
+
+div[name="bottom-right"] {
+    padding-left: 0;
+}
+
+.header.damage,
+.header.guilty_person {
+    margin-left: 0;
+}
+
+.page_header {
+    background-color: #2ebaee;
+    margin: 0 -12px 0 0;
+    text-align: center;
+}
+
+.right_side div.page_header {
+    margin-left: -6px;
+    margin-right: 0;
+}
+
+h5 {
+    margin: 0;
+}
+

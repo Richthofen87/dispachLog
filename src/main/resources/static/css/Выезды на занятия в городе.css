@@ -1,0 +1,113 @@
+.container {
+	font-size: 14px;
+	font-family: 'Roboto Flex', sans-serif;
+	font-weight: 600;
+	padding-top: 20px;
+}
+
+input,
+select {
+	width: 100%;
+	font-weight: 400;
+	font-size: 15px;
+}
+
+div.right_side,
+div.left_side {
+	margin: 0;
+	padding: 0 12px;
+}
+
+div.left_side {
+	padding-left: 232px;
+}
+
+input[name="datetime"],
+select {
+	width: 150px;
+	height: 27px;
+}
+
+table {
+	margin: 0;
+}
+
+table td {
+	height: 26px;
+}
+
+.textField_who_was_involved {
+	max-width: 100%;
+	height: 221px;
+	overflow: auto;
+	border: 1px solid #000;
+	padding: 0;
+	border-left: none;
+}
+
+table[name="who_was_involved"],
+.textField_who_was_involved table {
+	max-width: 100%;
+}
+
+table[name="who_was_involved"] {
+	margin-top: 5px;
+}
+
+table[name="who_was_involved"] td {
+	border-bottom: none;
+	width: 71px;
+}
+
+.textField_who_was_involved td {
+	border-top: none;
+	width: 71px;
+}
+
+.textField_who_was_involved table td[name="subdivision"],
+table[name="who_was_involved"] td[name="subdivision"] {
+	width: 110px;
+}
+
+.additional_information,
+.additional_information_textField {
+	margin-left: 0;
+}
+
+.additional_information_textField {
+	height: 100%;
+	font-size: 15px;
+}
+
+p {
+	margin: 5px 0;
+}
+
+p[name="records history"] {
+	margin-bottom: 10px;
+}
+
+.additional_information {
+	margin: 10px 0;
+	max-height: 100%;
+}
+
+.textField_trips2 {
+	width: 624px;
+	font-size: 15px;
+}
+
+div.buttons input {
+	width: 143.48px;
+	font-size: 14px;
+}
+
+.row.buttons {
+	width: 624px;
+}
+
+.header {
+	background-color: #2ebaee;
+	margin: 0 -12px 10px 0;
+	text-align: center;
+}

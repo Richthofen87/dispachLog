@@ -1,0 +1,25 @@
+.row.buttons {
+	max-width: 100%;
+}
+
+div.buttons input[type="button"],
+div.buttons a {
+    margin-top: 10px;
+}
+
+.right_side > div div:first-child > input {
+	margin-top: 31px;
+}
+
+.textField_who_was_involved td,
+table[name="who_was_involved"] td {
+	width: 89px;
+}
+
+.textField_who_was_involved table td[name="subdivision"], table[name="who_was_involved"] td[name="subdivision"] {
+    width: 150px;
+}
+
+.textField_who_was_involved input {
+	text-align: center;
+}

@@ -1,0 +1,7 @@
+div.header {
+    background-color: #E58F65;
+}
+
+.container .col-10:nth-child(1) {
+    border-color: #E58F65;
+}
