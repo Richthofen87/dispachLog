@@ -1,15 +1,16 @@
 .container {
-	font-size: 14px;
-	font-family: 'Roboto Flex', sans-serif;
-	font-weight: 600;
+    font-family: 'Roboto';
+    font-weight: 500;
 	padding-top: 20px;
+	max-width: 1600px;
 }
 
 input,
-select {
-	width: 100%;
-	font-weight: 400;
+select,
+input[name="datetime"] {
 	font-size: 15px;
+	height: 27px;
+	font-weight: 400;
 }
 
 div.right_side,
@@ -22,12 +23,6 @@ div.left_side {
 	padding-left: 232px;
 }
 
-input[name="datetime"],
-select {
-	width: 150px;
-	height: 27px;
-}
-
 table {
 	margin: 0;
 }
@@ -37,8 +32,8 @@ table td {
 }
 
 .textField_who_was_involved {
-	max-width: 100%;
-	height: 221px;
+	width: 528px;
+	max-height: 221px;
 	overflow: auto;
 	border: 1px solid #000;
 	padding: 0;
@@ -47,7 +42,6 @@ table td {
 
 table[name="who_was_involved"],
 .textField_who_was_involved table {
-	max-width: 100%;
 }
 
 table[name="who_was_involved"] {
@@ -56,22 +50,36 @@ table[name="who_was_involved"] {
 
 table[name="who_was_involved"] td {
 	border-bottom: none;
-	width: 71px;
+	height: 30px;
 }
 
 .textField_who_was_involved td {
 	border-top: none;
-	width: 71px;
 }
 
-.textField_who_was_involved table td[name="subdivision"],
+.textField_who_was_involved table td.subdivision,
 table[name="who_was_involved"] td[name="subdivision"] {
+	width: 130px;
+}
+
+
+td[name="return_time"], td[name="check_out_time"] {
 	width: 110px;
+}
+
+td[name="div_number"],
+td[name="stuff"] {
+	width: 45px;
+}
+
+td[name="car_type"] {
+	width: 70px;
 }
 
 .additional_information,
 .additional_information_textField {
 	margin-left: 0;
+	width: 528px;
 }
 
 .additional_information_textField {
@@ -93,7 +101,7 @@ p[name="records history"] {
 }
 
 .textField_trips2 {
-	width: 624px;
+	width: 897px;
 	font-size: 15px;
 }
 
@@ -103,11 +111,54 @@ div.buttons input {
 }
 
 .row.buttons {
-	width: 624px;
+	width: 100%;
 }
 
 .header {
 	background-color: #2ebaee;
 	margin: 0 -12px 10px 0;
 	text-align: center;
+}
+
+.right_side td[name="category"] {
+    width: 300px;
+}
+
+form.left_side {
+	width: 554px;
+}
+
+input[name="index"] {
+    margin-left: 10px;
+}
+
+div.row_buttons {
+    margin-left: 12px;
+    margin-bottom: 5px;
+}
+
+.index input[name="index"] {
+    height: 28px;
+}
+
+div.delete button {
+    margin-left: 5px;
+}
+
+div.is_complete label {
+    margin: 2px -20px 0 205px;
+}
+
+div.is_complete input[type='checkbox'] {
+    margin: 7px;
+}
+
+.right_side td[name="address_emer_trips"] div {
+    overflow:auto;
+    width: 270px;
+}
+
+.right_side td[name="category"] div {
+    overflow:auto;
+    width: 290px;
 }

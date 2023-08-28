@@ -1,61 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>ДЕЖУРНАЯ СМЕНА</title>
-	<link rel="shortcut icon" type="image/svg" href="img/favicon.ico"/>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style2.css">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ДЕЖУРНАЯ СМЕНА</title>
+    <link rel="shortcut icon" type="image/svg" href="../static/img/favicon.ico" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/style2.css" th:href="@{/css/style2.css}">
 </head>
 <body>
-	<div class="container">
-		<div class="row gx-0 title">
-			<h1>Дежурная смена</h1>
-		</div>
-		<form method="POST" action="#">
-			<div class="row gx-0">
-				<label class="col-6" for="duty number">Номер смены</label>
-				<select class="col-6" name="duty number" id="duty number">
- 					<option value=""></option>
- 					<option value="1 смена">1 смена</option>
- 					<option value="2 смена">2 смена</option>
- 					<option value="3 смена">3 смена</option>
- 					<option value="4 смена">4 смена</option>
-				</select>
-			</div>
-			<div class="row gx-0">
-				<label class="col-6" for="sod cuks">СОД ЦУКС</label>
-				<input class="col-6" type="text" name="sod cuks" id="sod cuks" autocomplete="on">
-			</div>
-			<div class="row gx-0">
-				<label class="col-6" for="nds cuks">НДС ЦУКС</label>
-				<input class="col-6" type="text" name="nds cuks" id="nds cuks" autocomplete="on">
-			</div>
-			<div class="row gx-0">
-				<label class="col-6" for="nds spt">НДС СПТ</label>
-				<input class="col-6" type="text" name="nds spt" id="nds spt">
-			</div>
-			<div class="row gx-0">
-				<label class="col-6" for="spnds sptr">СПНДС СПТ</label>
-				<input class="col-6" type="text" name="spnds spt" id="spnds sptr">
-			</div>
-			<div class="row gx-0">
-				<label class="col-6" for="garrison dispatcher">Диспетчер гарнизона</label>
-				<input class="col-6" type="text" name="garrison dispatcher" id="garrison dispatcher">
-			</div>
-			<div class="row gx-0">
-				<label class="col-6" for="cpps dispatcher">Диспетчер ЦППС СПТ</label>
-				<input class="col-6" type="text" name="cpps dispatcher" id="cpps dispatcher">
-			</div>
-			<div class="row gx-0 buttons">
-				<input class="col-3 button" type="submit" value="Сохранить">
-				<input class="col-3 button reset" type="reset" value="Очистить">
-				<a class="button" href="Главная.html">Назад</a>
-			</div>
-	</div>
+<div class="container">
+    <div class="row gx-0 title">
+        <h1>Дежурная смена</h1>
+    </div>
+    <form method="POST" action="#" th:object="${dutyGuard}" th:action="@{/duty_guard/save}">
+        <div class="row gx-0">
+            <label class="col-6" for="duty_number">Номер смены</label>
+            <select class="col-6" id="duty_number" th:field="*{prKey.guardNumber}" th:errorclass="error">
+                <option value="">
+                    <p th:if="${#fields.hasErrors('prKey.guardNumber')}" th:errors="*{prKey.guardNumber}"></p>
+                </option>
+                <option value="1">1 смена</option>
+                <option value="2">2 смена</option>
+                <option value="3">3 смена</option>
+                <option value="4">4 смена</option>
+            </select>
+        </div>
+        <div class="row gx-0">
+            <label class="col-6" for="sod_cuks">СОД ЦУКС</label>
+            <select class="col-6" id="sod_cuks" th:field="*{sodCuks.name}" th:errorclass="error">
+                <option value="">
+                    <p th:if="${#fields.hasErrors('sodCuks.name')}" th:errors="*{sodCuks.name}"></p>
+                </option>
+                <option th:each="sodCuks : ${application.categoriesMap.fioCuksList}"
+                        th:value="${sodCuks}" th:text="${sodCuks}"></option>
+            </select>
+        </div>
+        <div class="row gx-0">
+            <label class="col-6" for="nds_cuks">НДС ЦУКС</label>
+            <select class="col-6" th:field="*{ndsCuks.name}" id="nds_cuks">
+                <option value=""></option>
+                <option th:each="ndsCuks : ${application.categoriesMap.fioCuksList}"
+                        th:value="${ndsCuks}" th:text="${ndsCuks}"></option>
+            </select>
+        </div>
+        <div class="row gx-0">
+            <label class="col-6" for="nds_spt">НДС СПТ</label>
+            <select class="col-6" id="nds_spt" th:field="*{ndsSpt.name}" th:errorclass="error">
+                <option value="">
+                    <p th:if="${#fields.hasErrors('ndsSpt.name')}" th:errors="*{ndsSpt.name}"></p>
+                </option>
+                <option th:each="ndsSpt : ${application.categoriesMap.fioSptList}"
+                        th:value="${ndsSpt}" th:text="${ndsSpt}"></option>
+            </select>
+        </div>
+        <div class="row gx-0">
+            <label class="col-6" for="spnds_spt">СПНДС СПТ</label>
+            <select class="col-6" th:field="*{spndsSpt.name}" id="spnds_spt">
+                <option value=""></option>
+                <option th:each="spndsSpt : ${application.categoriesMap.fioSptList}"
+                        th:value="${spndsSpt}" th:text="${spndsSpt}"></option>
+            </select>
+        </div>
+        <div class="row gx-0">
+            <label class="col-6" for="garrison_dispatcher">Диспетчер гарнизона</label>
+            <select class="col-6" id="garrison_dispatcher" th:field="*{garrisonDispatcher.name}" th:errorclass="error">
+                <option value="">
+                    <p th:if="${#fields.hasErrors('garrisonDispatcher.name')}" th:errors="*{garrisonDispatcher.name}"></p>
+                </option>
+                <option th:each="garDis : ${application.categoriesMap.fioDispatcherList}"
+                        th:value="${garDis}" th:text="${garDis}"></option>
+            </select>
+        </div>
+        <div class="row gx-0">
+            <label class="col-6" for="cpps_dispatcher">Диспетчер ЦППС СПТ</label>
+            <select class="col-6" th:field="*{cppsDispatcher.name}" id="cpps_dispatcher">
+                <option value=""></option>
+                <option th:each="dis : ${application.categoriesMap.fioDispatcherList}"
+                        th:value="${dis}" th:text="${dis}"></option>
+            </select>
+        </div>
+        <div class="row gx-0 buttons">
+            <input class="col-3 button" type="submit" value="Сохранить">
+            <input class="col-3 button reset" type="reset" value="Очистить">
+            <a class="button" href="/cpps-log/">Назад</a>
+        </div>
+    </form>
+</div>
 </body>
 </html>

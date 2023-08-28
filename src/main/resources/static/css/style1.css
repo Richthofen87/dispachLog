@@ -1,46 +1,99 @@
 @font-face {
-    font-family: Montserrat;
-    src: url(fonts/Montserrat/static/Montserrat-MediumItalic.ttf);
+    font-family: 'Roboto Flex';
+    src: url('../fonts/Roboto/Roboto-Regular.ttf');
+}
+
+body {
+    background: #e6393f url('../img/wallpaperflare.com_wallpaper.jpg') no-repeat;
+    background-size: cover;
 }
 
 .container {
-	padding: 50px 0;
-	border-radius: 8px;
-	margin: 50px auto;
-	background-color: buttonfield;
 	max-width: 600px;
+	height: 100%;
+    margin-top: 8%;
 }
 
-.select {
+input,
+.duty_trips_info {
+	display: block;
 	height: 60px;
-	max-width: 400px;
+	width: 300px;
 	margin: 20px auto;
 	line-height: 60px;
 	text-align: center;
-}
-
-a {
-	display: block;
 	text-decoration: none;
 	color: #000;
 	font-size: 20px;
 	font-family: 'Roboto Flex', sans-serif;
 	border: 1px solid #000;
 	border-radius: 8px;
-	background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgb(255, 248, 220, 0.8);
 }
 
-a:hover {
+.duty_trips_info {
+    width: 590px;
+    display: flex;
+    height: 40px;
+    line-height: 40px;
+}
+
+.duty_trips_info * {
+     max-height: 100%;
+}
+
+#duty_date {
+    background-color: #fff;
+    border: none;
+    height: 100%;
+    border-radius: 0;
+    font-size: 18px;
+}
+
+.print_duty_info_icon {
+    width: 30px;
+    height: 30px;
+    margin-top: -5px;
+}
+
+.print_duty_info_button {
+    width: 48px;
+    border-width: 0;
+    border-radius: 0 8px 8px 0;
+}
+
+label[for=duty_date] {
+    border-right: 1px solid #000;
+}
+
+input#duty_date {
+	border-right: 1px solid #000;
+}
+
+input:not(#duty_date):hover {
 	color: #0d6efd;
 	border: 1px solid #0d6efd;
 	box-shadow: 0 0 5px 2px #0d6efd;
 }
 
-a:active {
+input:not(#duty_date):active {
 	border-style: groove;
     color: #000;
     border: 2px solid #0d6efd;
     box-shadow: none;
+}
+
+.print_duty_info_button:hover {
+    border: 1px solid #0d6efd;
+    box-shadow: 0 0 3px 1px #0d6efd;
+    margin-left: 1px;
+    font-weight: normal;
+}
+
+.print_duty_info_button:active {
+    border: 2px solid #0d6efd;
+    box-shadow: none;
+    margin-left: 1px;
 }
 
 

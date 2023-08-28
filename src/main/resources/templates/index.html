@@ -1,39 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Журнал выездов ЦППС</title>
-	<link rel="shortcut icon" type="image/svg" href="img/favicon.ico"/>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/style1.css">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:wght@400;600&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Журнал выездов ЦППС</title>
+    <link rel="shortcut icon" type="image/svg" href="../static/img/favicon.ico" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/style1.css" th:href="@{/css/style1.css}">
 </head>
 <body>
-	<div class="container">
-		<div class="select col-12">
-			<a href="Дежурная смена.html">Дежурная смена</a>
-		</div>
-		<div class="select col-12">
-			<a href="Выезды по тревоге в городе.html">Выезды по тревоге в городе</a>
-		</div>
-		<div class="select col-12">
-			<a href="Выезды по тревоге в области.html">Выезды по тревоге в области</a>
-		</div>
-		<div class="select col-12">
-			<a href="Выезды на занятия в городе.html">Выезды на занятия в городе</a>
-		</div>
-		<div class="select col-12">
-			<a href="Выезды на занятия в области.html">Выезды на занятия в области</a>
-		</div>
-		<div class="select col-12">
-			<a href="#">Оперативные сводки</a>
-		</div>
-		<div class="select col-12">
-			<a href="#">Круглосутка</a>
-		</div>
-	</div>
+<div class="container">
+    <form class="col-12" method="get" th:action="@{/duty_guard}">
+        <input type="submit" value="Дежурная смена">
+    </form>
+    <form class="col-12" method="get" th:action="@{/emergencyTripsCity/}" target="_blank">
+        <input hidden name="pageNumber" value="0">
+        <input type="submit" value="Выезды по тревоге в городе">
+    </form>
+    <form class="col-12" method="get" th:action="@{/regionEmergencyTrips/}" target="_blank">
+        <input hidden name="pageNumber" value="0">
+        <input type="submit" value="Выезды по тревоге в области">
+    </form>
+    <form class="col-12" method="get" th:action="@{/nonEmergencyTripsCity/}" target="_blank">
+        <input hidden name="pageNumber" value="0">
+        <input type="submit" value="Выезды на занятия в городе">
+    </form>
+    <form class="col-12" method="get" th:action="@{/regionNonEmergencyTrips/}" target="_blank">
+        <input hidden name="pageNumber" value="0">
+        <input type="submit" value="Выезды на занятия в области">
+    </form>
+    <form class="row gx-0 duty_trips_info" method="get" action="#" th:action="@{/printDutyTrips}" target="_blank">
+        <label class="col-8" for="duty_date">Данные по выездам за дежурные сутки</label>
+        <input class="col-3" id="duty_date" name="date" type="date">
+        <div class="col-1">
+            <button class="print_duty_info_button" type="submit" >
+                <img class="print_duty_info_icon" src="../static/img/outline_print_black_24dp.png"
+                     th:src="@{/img/outline_print_black_24dp.png}">
+            </button>
+        </div>
+    </form>
+</div>
 </body>
 </html>

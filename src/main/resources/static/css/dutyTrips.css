@@ -1,0 +1,92 @@
+.container-fluid {
+    font-size: 12px;
+    width: 798px;
+    margin-left: 50px;
+    padding: 50px 0;
+}
+
+p {
+    margin: 0;
+}
+
+table {
+    max-width: 100%;
+}
+
+table td {
+    border: 1px solid #000;
+    text-align: center;
+    padding: 0;
+    font-size: 10px;
+    width: 20px;
+}
+
+td.rotate {
+    margin: 0;
+    writing-mode: vertical-rl;
+    transform: scale(-1);
+}
+
+table tr:nth-child(2) {
+    height: 150px;
+}
+
+table td.first-col {
+    width: 100px;
+}
+
+.tripDesc {
+    margin-top: 20px;
+    width: 600px;
+}
+
+.tripDesc + p {
+    margin: 20px 0;
+}
+
+.tripDescHead {
+    font-weight: 500;
+    text-decoration: underline;
+}
+
+.footer,
+.footer + p,
+select {
+    font-weight: 500;
+}
+
+.footer {
+    margin-bottom: 20px;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  background-color: #fff;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.header {
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.date {
+    margin: 10px 0 5px 0;
+}
+
+#rank {
+    width: 150px;
+}
+
+#nds_spt {
+    margin-left: 190px;
+}
+
+#rank {
+    margin-top: 5px;
+}

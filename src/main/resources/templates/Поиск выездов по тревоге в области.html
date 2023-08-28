@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ПОИСК ВЫЕЗДОВ ОБЛ.</title>
+    <link rel="shortcut icon" type="image/svg" href="../static/img/favicon.ico" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/style3.css" th:href="@{/css/style3.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/style4.css" th:href="@{/css/style4.css}">
+    <script th:src="@{/assets/js/jquery-3.7.0.min.js}"></script>
+    <script defer th:inline="javascript">
+        $(document).ready(function () {
+
+            var obj1 = Object([[${application.categoriesMap.fioSptList}]]);
+            var obj = Object([[${application.settlementDivisionsMap}]]);
+            var obj2 = Object([[${application.garrisonSettlementsMap}]]);
+            var v = new Option('', '');
+            v.setAttribute('selected', '');
+
+            $("#garrison").change(function () {
+                var val = $(this).val();
+                if (val != '') {
+                    $("#settlement > option").remove();
+                    $("#settlement").append(v);
+                    for (const div of obj2[val]) {
+                        $("#settlement").append(new Option(div, div));
+                    }
+                }
+            });
+
+            $("select#division").change(function () {
+                var val = $(this).val();
+                if (val != '') {
+                    $(this).parent().siblings('[name="car_number"]').children().attr('placeholder', 'A123AA49');
+                }
+                else {
+                    $("input#carNumber").removeAttr('placeholder');
+                }
+            });
+
+            $("div.textField_rtp td[name='job_title'] > select").change(func);
+            $("div.textField_table3 td[name='job_title'] > select").change(func);
+
+            function func() {
+                var curr = $(this);
+                var val = curr.val();
+                var el = $(this).parent().next();
+                var elNameAttr = el.children().attr('name');
+                if (val == 'НДС СПТ' || val == 'СПТ') {
+                    el.empty();
+                    el.html('<select>');
+                    el.children("select").append(new Option('', ''))
+                    for (const fio of obj1) {
+                        el.children().append(new Option(fio, fio));
+                    }
+                }
+                else {
+                    el.empty();
+                    el.html('<input type=\"text\">');
+                }
+                el.children().attr('name', elNameAttr);
+            };
+
+             var cond = [[${regionTripsPageSearch}]]
+        	 $("div.textField_trips2 tr").click(function () {
+        	    if (cond != null) {
+        	        let pageNumber = cond.number;
+            	    let tripsCount = cond.size;
+        	        let tripIndex = $(this).find("td:first-child").text() - tripsCount * pageNumber - 1;
+             	    let form = document.createElement('form');
+                    form.action = 'record';
+                    form.method = 'GET';
+                    form.innerHTML = `<input name="tripIndex" value=${tripIndex}>`;
+                    document.body.append(form);
+                    form.submit();
+        	     }
+        	});
+
+        	function func1(event) {
+                if(event.keyCode == 13) {
+                event.preventDefault();
+                return false;
+                }
+           };
+
+           $("form#tripForm input[type='text']").keydown(func1);
+           $("form#tripForm input[type='time']").keydown(func1);
+           $("form#tripForm input[type='textarea']").keydown(func1);
+           $("form#tripForm input[type='checkbox']").keydown(func1);
+        });
+    </script>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <form class="col-8 left_side" id="tripForm" method="POST" action="#" th:action="@{/regionEmergencyTripsSearch/edit}"
+              th:object="${regionEmergencyTripEditSearch}">
+            <div class="row gx-4">
+                <div class="col-6 top_left">
+                    <div class="row gx-2">
+                        <div class="col-3">
+                            <p>Дата и время</p>
+                        </div>
+                        <div class="col-4">
+                            <p>Гарнизон</p>
+                        </div>
+                        <div class="col-5">
+                            <p>Населённый пункт</p>
+                        </div>
+                        <div class="col-3 size">
+                            <input type="datetime-local" name="datetime" th:field="*{dateTime}" th:errorclass="error">
+                        </div>
+                        <div class="col-4 size">
+                            <select id="garrison" name="garrison">
+                                <option value="" selected
+                                        th:text="*{settlement == null} ? _ : *{settlement.garrison.name}"></option>
+                                <option value=""
+                                        th:each="pos : ${application.garrisonSettlementsMap}"
+                                        th:value="${pos.key}" th:text="${pos.key}"
+                                        th:if="${pos.key} != 'Магаданский ПСГ'">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-5 size">
+                            <select id="settlement" name="settlement" th:field="*{settlement}" th:errorclass="error">
+                                <option value="" selected></option>
+                                <option value=""
+                                        th:each="pos : ${application.categoriesMap.regionSettlementsList}"
+                                        th:value="${pos}" th:text="${pos}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <p>Адрес</p>
+                        </div>
+                        <div class="col-6">
+                            <p>Категория выезда</p>
+                        </div>
+                        <div class="col-6">
+                            <input type="text" name="address" th:field="*{address}" th:errorclass="error">
+                        </div>
+                        <div class="col-6">
+                            <select th:field="*{tripCategory}" th:errorclass="error">
+                                <option value="" selected></option>
+                                <option value=""
+                                        th:each="pos : ${application.categoriesMap.emergencyTripsCategoriesList}"
+                                        th:value="${pos}" th:text="${pos}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-6">
+                            <p>Заявитель</p>
+                        </div>
+                        <div class="col-6">
+                            <p>Кто передал</p>
+                        </div>
+                        <div class="col-6">
+                            <input type="text" name="applicant" th:field="*{applicant}">
+                        </div>
+                        <div class="col-6">
+                            <input type="text" name="whoReported" th:field="*{whoReported}">
+                        </div>
+                        <div class="col-6">
+                            <p>Первичное сообщение</p>
+                        </div>
+                        <div class="col-6">
+                            <p>Кто принял (ЦППС)</p>
+                        </div>
+                        <div class="col-6">
+                            <textarea class="" name="text" th:field="*{primaryMessage}"></textarea>
+                        </div>
+                        <div class="col-6 whoTook">
+                            <select th:field="*{whoTook}" th:errorclass="error">
+                                <option value=""></option>
+                                <option value=""
+                                        th:each="pos : ${application.categoriesMap.fioDispatcherList}"
+                                        th:value="${pos}" th:text="${pos}">
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 padding-left-0">
+                    <div class="row part2">
+                        <div class="col">
+                            <div class="col-12">
+                                <p class="response_time">Время реагирования</p>
+                            </div>
+                            <table class="table1">
+                                <thead>
+                                <tr>
+                                    <td>
+                                        <p>Время сообщ.</p>
+                                    </td>
+                                    <td>
+                                        <p>Время выезда</p>
+                                    </td>
+                                    <td>
+                                        <p>Время приб.</p>
+                                    </td>
+                                    <td>
+                                        <p>1-й ствол</p>
+                                    </td>
+                                    <td>
+                                        <p>ЛОК</p>
+                                    </td>
+                                    <td>
+                                        <p>ЛОГ</p>
+                                    </td>
+                                    <td>
+                                        <p>Полная ликв.</p>
+                                    </td>
+                                    <td>
+                                        <p>Время возвр.</p>
+                                    </td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td><input type="time" name="messageTime" th:field="*{messageTime}"
+                                               th:errorclass="error"></td>
+                                    <td><input type="time" name="checkOutTime" th:field="*{checkOutTime}"
+                                               th:errorclass="error">
+                                    </td>
+                                    <td><input type="time" name="" th:field="*{arrivalTime}"></td>
+                                    <td><input type="time" name="" th:field="*{firstBarrelTime}"></td>
+                                    <td><input type="time" name="" th:field="*{locTime}"></td>
+                                    <td><input type="time" name="" th:field="*{logTime}"></td>
+                                    <td><input type="time" name="" th:field="*{completeLiqTime}"></td>
+                                    <td><input type="time" name="returnTime" th:field="*{returnTime}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-7">
+                            <p class="rtp_header">РТП</p>
+                        </div>
+                        <div class="col-3">
+                            <p class="departure_area">Район выезда</p>
+                        </div>
+                        <div class="col-2 fire_rank">
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="fire_rank">Ранг</p>
+                                </div>
+                                <div class="col-6" name="fire_rank">
+                                    <select name="fireRank" th:field="*{fireRank}">
+                                        <option value="" selected></option>
+                                        <option value="1">1</option>
+                                        <option value="1 БИС">1 БИС</option>
+                                        <option value="2">2</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-7 rtp">
+                            <div class="textField_rtp" name="rtp">
+                                <table>
+                                    <tr th:each="rtp,stat : ${regionEmergencyTripEditSearch.rtpList}">
+                                        <td name="number">
+                                            <input type="text" th:field="${regionEmergencyTripEditSearch.rtpList[__${stat.index}__].orderRtp}">
+                                        </td>
+                                        <td name="job_title">
+                                            <select th:field="${regionEmergencyTripEditSearch.rtpList[__${stat.index}__].positionRtp.name}"
+                                                    th:errorclass="error">
+                                                <option value=""></option>
+                                                <option value=""
+                                                        th:each="pos : ${application.categoriesMap.positionsRtpList}"
+                                                        th:value="${pos}" th:text="${pos}">ЗНГУ по ГПС
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td name="fioRtp">
+                                            <input type="text" name="fioRtp"
+                                                   th:field="${regionEmergencyTripEditSearch.rtpList[__${stat.index}__].fioRtp}"
+                                                   th:errorclass="error">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="col-2" name="departure_area">
+                            <div class="row">
+                                <div class="col-12">
+                                    <select id="departure_area" name="departureArea" th:field="*{departureArea}"
+                                            th:errorclass="error">
+                                        <option value="" selected></option>
+                                        <option value=""
+                                                th:each="pos : ${application.categoriesMap.divisionsRegionsList}"
+                                                th:value="${pos}" th:text="${pos}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3 fireFightingHeadquarters">
+                            <div class="row">
+                                <div class="col-6">
+                                    <p class="firefighting_headquarters">Штаб</p>
+                                </div>
+                                <div class="col-6">
+                                    <input type="checkbox" name="fireFightingHeadquarters"
+                                           th:field="*{fireFightingHeadquarters}">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row gx-0 justify-content-start row_buttons" th:if="${regionTripsPageSearch != null}">
+
+                            <div class="col-4 add">
+                                <button type="submit" th:formaction="@{/regionEmergencyTripsSearch/addNewRtpEdit}">
+                                    <img src="../static/img/add_FILL0_wght400_GRAD0_opsz48.png"
+                                         th:src="@{/img/add_FILL0_wght400_GRAD0_opsz48.png}">
+                                </button>
+                            </div>
+
+                            <div class="col-4 delete">
+                                <button type="submit" th:formaction="@{/regionEmergencyTripsSearch/deleteRtpEdit}">
+                                    <img src="../static/img/delete_FILL0_wght400_GRAD0_opsz48.png"
+                                         th:src="@{/img/delete_FILL0_wght400_GRAD0_opsz48.png}">
+                                    <input hidden name="pageNumber" th:value="${regionTripsPageSearch.getNumber()}" form="tripForm">
+                                </button>
+                            </div>
+
+                            <div class="col-4 index">
+                                <input type="text" name="indexRtp" pattern="\d+">
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <p class="trips">Выезжали</p>
+            </div>
+            <div class="row">
+                <div class="col-12 table2_col">
+                    <table class="table2">
+                        <thead>
+                        <tr>
+                            <td class="subdivision" rowspan="2">
+                                <p>Подразделение</p>
+                            </td>
+                            <td rowspan="2">
+                                <p>Отд.</p>
+                            </td>
+                            <td rowspan="2">
+                                <p>Л/с</p>
+                            </td>
+                            <td rowspan="2">
+                                <p>Тип ПА</p>
+                            </td>
+                            <td rowspan="2">
+                                <p>Время выезда</p>
+                            </td>
+                            <td rowspan="2">
+                                <p>Время приб.</p>
+                            </td>
+                            <td rowspan="2">
+                                <p>Время возвр.</p>
+                            </td>
+                            <td colspan="3">
+                                <p>Водяные стволы</p>
+                            </td>
+                            <td colspan="3">
+                                <p>Пенные стволы</p>
+                            </td>
+                            <td rowspan="2" name="GDZS">
+                                <p>Звено гдзс</p>
+                            </td>
+                            <td rowspan="2" name="GDZS_work">
+                                <p>Работа ГДЗС, мин</p>
+                            </td>
+                            <td rowspan="2" name="car_number">
+                                <p>Г/н ПА</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td name="barrel">
+                                <p>А</p>
+                            </td>
+                            <td name="barrel">
+                                <p>Б</p>
+                            </td>
+                            <td name="barrel">
+                                <p>ЛС</p>
+                            </td>
+                            <td name="barrel">
+                                <p>Пурга</p>
+                            </td>
+                            <td name="barrel">
+                                <p>ГПС</p>
+                            </td>
+                            <td name="barrel">
+                                <p>СВП</p>
+                            </td>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            <div class="textField_trips">
+                <table class="table2_1">
+                    <tr th:each="divTrip,stat : ${regionEmergencyTripEditSearch.alarmDivisionWorkList}">
+                        <td class="subdivision">
+                            <select id="division"
+                                    th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].division}"
+                                    th:errorclass="error">
+                                <option value="" selected></option>
+                                <option value=""
+                                        th:each="pos : ${application.categoriesMap.divisionsCityList}"
+                                        th:value="${pos}" th:text="${pos}">
+                                </option>
+                                <option value=""
+                                        th:each="pos : ${application.categoriesMap.divisionsRegionsList}"
+                                        th:value="${pos}" th:text="${pos}">
+                                </option>
+                            </select>
+                        </td>
+                        <td>
+                            <select th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].divisionNumber}"
+                                    th:errorclass="error">
+                                <option value="" selected></option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="Резерв">Резерв</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="text"
+                                   th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].stuff}"
+                                   th:errorclass="error">
+                        </td>
+                        <td>
+                            <select id="carType"
+                                    th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].carType}"
+                                    th:errorclass="error">
+                                <option value="" selected></option>
+                                <option value=""
+                                        th:each="pos : ${application.categoriesMap.carTypesList}"
+                                        th:value="${pos}" th:text="${pos}">
+                                </option>
+                            </select>
+                        </td>
+                        <td><input id="checkOutTime" type="time"
+                                   th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].checkOutTime}"
+                                   th:errorclass="error">
+                        </td>
+                        <td><input id="arrivalTime" type="time"
+                                   th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].arrivalTime}">
+                        </td>
+                        <td><input id="returnTime" type="time"
+                                   th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].returnTime}">
+                        </td>
+                        <td name="barrel"><input id="barrelA" type="text" pattern="\d+"
+                                                 th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].barrelA}">
+                        </td>
+                        <td name="barrel"><input id="barrelB" type="text" pattern="\d+"
+                                                 th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].barrelB}">
+                        </td>
+                        <td name="barrel"><input id="barrelLs" type="text" pattern="\d+"
+                                                 th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].barrelLs}">
+                        </td>
+                        <td name="barrel"><input id="barrelPurga" type="text" pattern="\d+"
+                                                 th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].barrelPurga}">
+                        </td>
+                        <td name="barrel"><input id="barrelGps" type="text" pattern="\d+"
+                                                 th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].barrelGps}">
+                        </td>
+                        <td name="barrel"><input id="barrelSvp" type="text" pattern="\d+"
+                                                 th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].barrelSvp}">
+                        </td>
+                        <td name="GDZS"><input id="gdzsCount" type="text" pattern="\d+"
+                                               th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].gdzsCount}">
+                        </td>
+                        <td name="GDZS_work"><input id="gdzsWork" type="text" pattern="\d+"
+                                                    th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].gdzsWork}">
+                        </td>
+                        <td name="car_number">
+                            <input id="carNumber" type="text" pattern="[А-Я]\d{3}[А-Я]{2}\d{2}"
+                                   th:field="${regionEmergencyTripEditSearch.alarmDivisionWorkList[__${stat.index}__].carNumber}">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="row gx-0 justify-content-start row_buttons" th:if="${regionTripsPageSearch != null}">
+
+                <div class="col-4 add">
+                    <button type="submit" th:formaction="@{/regionEmergencyTripsSearch/addNewDivisionEdit}">
+                        <img src="../static/img/add_FILL0_wght400_GRAD0_opsz48.png"
+                             th:src="@{/img/add_FILL0_wght400_GRAD0_opsz48.png}">
+                    </button>
+                </div>
+
+                <div class="col-4 delete">
+                    <button type="submit" th:formaction="@{/regionEmergencyTripsSearch/deleteDivisionEdit}">
+                        <img src="../static/img/delete_FILL0_wght400_GRAD0_opsz48.png"
+                             th:src="@{/img/delete_FILL0_wght400_GRAD0_opsz48.png}">
+                        <input hidden name="pageNumber" th:value="${regionTripsPageSearch.getNumber()}" form="tripForm">
+                    </button>
+                </div>
+
+                <div class="col-4 index">
+                    <input type="text" name="indexDivision" pattern="\d+">
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="table3_header" th:class="${tripsPageSearch != null ? table3_header : 'table3_header search'}">Сообщено</p>
+                        </div>
+                        <div class="col-12">
+                            <table class="table3">
+                                <tbody>
+                                <td class="to_whom">Кому</td>
+                                <td class="message_time">Время сообщ.</td>
+                                <td class="who_arrived">Кто прибыл</td>
+                                <td class="arrival_time">Время приб.</td>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-12">
+                            <div class="textField_table3">
+                                <table class="table4">
+                                    <tbody>
+                                    <tr th:each="report,stat : ${regionEmergencyTripEditSearch.toWhomWasReportedList}">
+                                        <td class="job_title" name="job_title">
+                                            <select id="positionWasReported"
+                                                    th:field="${regionEmergencyTripEditSearch.toWhomWasReportedList[__${stat.index}__].positionWasReported.name}"
+                                                    th:errorclass="error">
+                                                <option value="" selected></option>
+                                                <option value=""
+                                                        th:each="pos : ${application.categoriesMap.positionsWasReportedList}"
+                                                        th:value="${pos}" th:text="${pos}">
+                                                </option>
+                                            </select>
+                                        </td>
+                                        <td class="fio">
+                                            <input id="nameWasReported" type="text"
+                                                   th:field="${regionEmergencyTripEditSearch.toWhomWasReportedList[__${stat.index}__].nameWasReported}"
+                                                   th:errorclass="error">
+                                        </td>
+                                        <td><input id="messageTime" type="time"
+                                                   th:field="${regionEmergencyTripEditSearch.toWhomWasReportedList[__${stat.index}__].messageTime}"
+                                                   th:errorclass="error"></td>
+                                        <td class="who_arrived">
+                                            <input id="nameWasArrived" type="text"
+                                                   th:field="${regionEmergencyTripEditSearch.toWhomWasReportedList[__${stat.index}__].nameWasArrived}">
+                                        </td>
+                                        <td><input id="arrivedTime" type="time" th:field="${regionEmergencyTripEditSearch.toWhomWasReportedList[__${stat.index}__].arrivedTime}">
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row gx-0 justify-content-start row_buttons" th:if="${regionTripsPageSearch != null}">
+
+                        <div class="col-4 add">
+                            <button type="submit" th:formaction="@{/regionEmergencyTripsSearch/addReportedEdit}">
+                                <img src="../static/img/add_FILL0_wght400_GRAD0_opsz48.png"
+                                     th:src="@{/img/add_FILL0_wght400_GRAD0_opsz48.png}">
+                            </button>
+                        </div>
+
+                        <div class="col-4 delete">
+                            <button type="submit" th:formaction="@{/regionEmergencyTripsSearch/deleteReportedEdit}">
+                                <img src="../static/img/delete_FILL0_wght400_GRAD0_opsz48.png"
+                                     th:src="@{/img/delete_FILL0_wght400_GRAD0_opsz48.png}">
+                                <input hidden name="pageNumber" th:value="${regionTripsPageSearch.getNumber()}" form="tripForm">
+                            </button>
+                        </div>
+
+                        <div class="col-4 index">
+                            <input type="text" name="indexReported" pattern="\d+">
+                        </div>
+
+                    </div>
+
+                    <div class="col-12">
+                        <p class="description_header">Описание</p>
+                    </div>
+                    <div class="col-12 description_col">
+    <textarea class="description_textField" name="text" id="descript" cols="30" rows="7"
+              th:field="*{descript}"></textarea>
+                    </div>
+                    <div class="col-12">
+                        <p class="radio_exchange_header">Радиообмен</p>
+                    </div>
+                    <div class="col-12">
+    <textarea class="radio_exchange_textField" name="text" id="radioExchange" cols="30" rows="4"
+              th:field="*{radioExchange}"></textarea>
+                    </div>
+                </div>
+                <div class="col-6" name="bottom-right" th:class="${tripsPageSearch != null ? 'col-6' : 'col-6 search'}">
+                    <div class="row" name="bottom-right">
+                        <div class="col-6 table5">
+                            <table class="table5">
+                                <thead>
+                                <td class="contents"></td>
+                                <td>Всего, чел.</td>
+                                <td>В т. ч. детей</td>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="content">Спасено</td>
+                                    <td><input id="rescued" type="text" pattern="\d+" th:field="*{rescued}"></td>
+                                    <td><input id="rescuedChildren" type="text" pattern="\d+"
+                                               th:field="*{rescuedChildren}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content">Травмировано</td>
+                                    <td><input id="injured" type="text" pattern="\d+" th:field="*{injured}"></td>
+                                    <td><input id="injuredChildren" type="text" pattern="\d+"
+                                               th:field="*{injuredChildren}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content">Эвакуировано</td>
+                                    <td><input id="evacuated" type="text" pattern="\d+" th:field="*{evacuated}"></td>
+                                    <td><input id="evacuatedChildren" type="text" pattern="\d+"
+                                               th:field="*{evacuatedChildren}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content">Погибло</td>
+                                    <td><input id="died" type="text" pattern="\d+" th:field="*{died}"></td>
+                                    <td><input id="diedChildren" type="text" pattern="\d+" th:field="*{diedChildren}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content">Погибло до прибытия</td>
+                                    <td><input id="diedBeforeArrival" type="text" pattern="\d+"
+                                               th:field="*{diedBeforeArrival}"></td>
+                                    <td><input id="diedBeforeArrivalChildren" type="text" pattern="\d+"
+                                               th:field="*{diedBeforeArrivalChildren}"></td>
+                                </tr>
+                                <tr>
+                                    <td class="content">Деблокировано</td>
+                                    <td><input id="released" type="text" pattern="\d+" th:field="*{released}"></td>
+                                    <td><input id="releasedChildren" type="text" pattern="\d+"
+                                               th:field="*{releasedChildren}"></td>
+                                </tr>
+                                <tr>
+                                    <td class="content" colspan="2">Сотрудники/работники ПО</td>
+                                </tr>
+                                <tr>
+                                    <td class="content">Травмировано</td>
+                                    <td><input id="injuredEmployees" type="text" pattern="\d+"
+                                               th:field="*{injuredEmployees}"
+                                    ></td>
+                                </tr>
+                                <tr>
+                                    <td class="content">Погибло</td>
+                                    <td><input id="diedEmployees" type="text" pattern="\d+" th:field="*{diedEmployees}">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-6 table6_col">
+                            <table class="table6">
+                                <tbody>
+                                <tr>
+                                    <td colspan="2">Чем потушено</td>
+                                </tr>
+                                <tr>
+                                    <td class="content">Подручными ср/ми</td>
+                                    <td><input id="extinguishedWithImproviseMeans" type="radio" name="extinguished"
+                                               value="extinguishedWithImproviseMeans" th:field="*{extinguished}"></td>
+                                </tr>
+                                <tr>
+                                    <td class="content">От АЦ</td>
+                                    <td><input id="extinguishedFromAc" type="radio" name="extinguished" checked
+                                               value="extinguishedFromAc" th:field="*{extinguished}"></td>
+                                </tr>
+                                <tr>
+                                    <td class="content">Источник ППВ</td>
+                                    <td>
+                                        <select id="waterSource" th:field="*{waterSource}">
+                                            <option value=""></option>
+                                            <option value=""
+                                                    th:each="pos : ${application.categoriesMap.waterSourceList}"
+                                                    th:value="${pos}" th:text="${pos}">
+                                            </option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content">Подача воды от ИНППВ</td>
+                                    <td>
+                                        <select id="waterSupply" th:field="*{waterSupply}">
+                                            <option value=""></option>
+                                            <option value=""
+                                                    th:each="pos : ${application.categoriesMap.waterSupplyList}"
+                                                    th:value="${pos}" th:text="${pos}">
+                                            </option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content">Слито воды, л.</td>
+                                    <td><input id="drainedWater" type="text" pattern="\d+" th:field="*{drainedWater}">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content">Слито ПО, л.</td>
+                                    <td><input id="drainedFoamConcentrate" type="text" pattern="\d+"
+                                               th:field="*{drainedFoamConcentrate}"></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Кем потушено</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <select id="whoExtinguished" th:field="*{whoExtinguished}">
+                                            <option value=""></option>
+                                            <option value=""
+                                                    th:each="pos : ${application.categoriesMap.whoExtinguishedList}"
+                                                    th:value="${pos}" th:text="${pos}">
+                                            </option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-6">
+                            <p class="header">Причина пожара</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="header guilty_person">Виновное лицо</p>
+                        </div>
+                        <div class="col-6">
+                            <select id="causeOfTheFire" th:field="*{causeOfTheFire}" class="cause_of_the_fire" th:errorclass="error">
+                                <option value=""></option>
+                                <option value=""
+                                        th:each="pos : ${application.categoriesMap.fireCauseList}"
+                                        th:value="${pos}" th:text="${pos}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-6 guilty_person">
+                            <input id="guiltyPerson" class="guilty_person" type="text" th:field="*{guiltyPerson}">
+                        </div>
+                        <div class="col-6">
+                            <p class="header">Объект</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="header damage">Ущерб</p>
+                        </div>
+                        <div class="col-6">
+                            <select id="fireObject" th:field="*{fireObject}" class="fire_object">
+                                <option value=""></option>
+                                <option value=""
+                                        th:each="pos : ${application.categoriesMap.fireObjectsList}"
+                                        th:value="${pos}" th:text="${pos}">
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-6 damage">
+                            <input id="fireDamage" class="damage" type="text" th:field="*{fireDamage}" pattern="\d+">
+                        </div>
+                        <div class="col-12">
+                            <p class="additional_information">Дополнительная информация</p>
+                        </div>
+                        <div class="col-12">
+                            <textarea id="additionaInformation" class="additional_information_textField" name="text"
+                                      rows="2" th:field="*{additionalInformation}"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="col-4 right_side">
+            <div class="col-12">
+                <div class="page_header">
+                    <h5>ВЫЕЗДЫ ПО ТРЕВОГЕ В ОБЛАСТИ</h5>
+                </div>
+            </div>
+            <div class="col-12">
+                <p name="records history">История записей</p>
+            </div>
+            <div class="col-12">
+                <table name="headers">
+                    <tr>
+                        <td name="number">№</td>
+                        <td name="date">Дата</td>
+                        <td name="time">Время</td>
+                        <td name="locality">Нас.пункт</td>
+                        <td name="address_emer_trips">Адрес</td>
+                        <td name="category">Категория выезда</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="textField_trips2">
+                <table>
+                    <tbody>
+                    <tr th:each="trip,stat : ${regionTripsPageSearch}">
+                        <td name="number"
+                            th:text="${stat.count + regionTripsPageSearch.getSize() * regionTripsPageSearch.getNumber()}">
+                        </td>
+                        <td name="date" th:text="${trip.dateTime.toLocalDate()}"></td>
+                        <td name="time" th:text="${trip.checkOutTime} ?: ${trip.messageTime}"></td>
+                        <td name="locality" th:text="${trip.settlement.name}"></td>
+                        <td name="address_emer_trips">
+                            <div th:text="${trip.address}"></div>
+                        </td>
+                        <td name="category">
+                            <div th:text="${trip.tripCategory.name}"></div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-12" th:if="${regionTripsPageSearch != null}">
+                <p th:text="|Найдено записей: ${regionTripsPageSearch.getTotalElements()}|"></p>
+            </div>
+            
+            <div class="row gx-3 buttons">
+
+                <form class="col-3" method="get" action="#" th:if="${regionTripsPageSearch != null}"
+                      th:action="${regionTripsPageSearch.isFirst()} ? @{/regionEmergencyTripsSearch/0} :
+                      @{/regionEmergencyTripsSearch/__${regionTripsPageSearch.getNumber()} - 1__}">
+                    <input type="submit" value="Пред. записи">
+                </form>
+
+                <form class="col-3" method="get" action="#" th:if="${regionTripsPageSearch != null}"
+                      th:action="${regionTripsPageSearch.isLast()} ? @{/regionEmergencyTripsSearch/__${regionTripsPageSearch.getNumber()}__} :
+                      @{/regionEmergencyTripsSearch/__${regionTripsPageSearch.getNumber()} + 1__}">
+                    <input type="submit" value="След. записи">
+                </form>
+
+                <form class="col-3" method="get" action="#" th:if="${regionTripsPageSearch != null}"
+                      th:action="@{/regionEmergencyTripsSearch/}">
+                    <input hidden name="clearFormFields" value="true">
+                    <input type="submit" value="Очистить форму">
+                </form>
+
+                <form class="col-3" th:if="${regionTripsPageSearch != null}" method="get" action="#" th:action="@{/regionEmergencyTripsSearch/}">
+                    <input hidden name="resetSearchResults" value="true">
+                    <input hidden name="pageNumber" th:value="${regionTripsPageSearch.getNumber()}">
+                    <input type="submit" value="Обновить поиск" >
+                </form>
+                <hr th:if="${regionTripsPageSearch != null}">
+
+                <div class="col-3 save_trip" th:if="${regionTripsPageSearch != null}">
+                    <input hidden name="pageNumber" th:value="${regionTripsPageSearch.getNumber()}" form="tripForm">
+                    <input type="submit" value="Изменить запись" form="tripForm">
+                </div>
+
+                <div class="col-3 delete_trip" th:if="${regionTripsPageSearch != null}">
+                    <input hidden name="pageNumber" th:value="${regionTripsPageSearch.getNumber()}" form="tripForm">
+                    <input type="submit" value="Удалить запись" formaction="#"
+                           th:formaction="@{/regionEmergencyTripsSearch/delete}"
+                           form="tripForm">
+                </div>
+
+                <form class="col-3" th:if="${regionTripsPageSearch != null}" method="get" action="#"
+                      th:action="@{/regionEmergencyTripsSearch/}">
+                    <input type="submit" value="Сбросить поиск">
+                </form>
+
+                <div class="col-1 saveDescript" th:if="${regionTripsPageSearch != null}">
+                    <button type="submit" value="Сохр. описание" form="tripForm"
+                            th:formaction="@{/regionEmergencyTripsSearch/saveDescription}">
+                        <img src="../static/img/outline_print_black_24dp.png"
+                             th:src="@{/img/outline_print_black_24dp.png}">
+                    </button>
+                </div>
+
+                <div class="col-1 saveDescript" th:if="${regionTripsPageSearch != null}">
+                    <button type="submit" value="Сохр. описание" form="tripForm"
+                            th:formaction="@{/regionEmergencyTripsSearch/saveAllDescriptions}">
+                        <img src="../static/img/dynamic_feed_FILL0_wght400_GRAD0_opsz48.png"
+                             th:src="@{/img/dynamic_feed_FILL0_wght400_GRAD0_opsz48.png}">
+                    </button>
+                </div>
+                <hr th:if="${regionTripsPageSearch != null}">
+
+                <div class="scroll">
+
+                    <input type="radio" id="l0" name="raz" checked="checked"/>
+                    <input type="radio" id="l1" name="raz"/>
+                    <input type="radio" id="l2" name="raz"/>
+                    <input type="radio" id="l3" name="raz"/>
+
+                    <label for="l0"></label>
+                    <label for="l1"></label>
+                    <label for="l2"></label>
+                    <label for="l3"></label>
+
+                    <div>
+                        <div class="formsWrapper">
+                            <form method="post" action="#" id="form4" th:object="${regionSearchFormWrapper}"
+                                  th:action="@{/regionEmergencyTripsSearch/search}">
+                                <p class="searchFormHeader form4">Поиск по категории</p>
+                                <input type="datetime-local" name="start" th:field="*{searchFormList[3].start}">
+                                <input type="datetime-local" name="end" th:field="*{searchFormList[3].end}">
+                                <input hidden name="regionFormNumber" value="3">
+                                <select name="garrison" th:field="*{searchFormList[3].garrison}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.garrisonSettlementsMap}"
+                                            th:value="${pos.key}" th:text="${pos.key}"
+                                            th:if="${pos.key} != 'Магаданский ПСГ'">
+                                    </option>
+                                </select>
+                                <select name="tripCategory" th:field="*{searchFormList[3].tripCategory}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.categoriesMap.emergencyTripsCategoriesList}"
+                                            th:value="${pos}" th:text="${pos}">
+                                    </option>
+                                </select>
+                                <input type="submit" value="Поиск">
+                            </form>
+
+                            <form method="post" action="#" id="form1" th:object="${regionSearchFormWrapper}"
+                                  th:action="@{/regionEmergencyTripsSearch/search}">
+                                <p class="searchFormHeader form1">Поиск по объекту пожара</p>
+                                <input type="datetime-local" name="start" th:field="*{searchFormList[0].start}">
+                                <input type="datetime-local" name="end" th:field="*{searchFormList[0].end}">
+                                <input hidden name="regionFormNumber" value="0">
+                                <select name="garrison" th:field="*{searchFormList[0].garrison}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.garrisonSettlementsMap}"
+                                            th:value="${pos.key}" th:text="${pos.key}"
+                                            th:if="${pos.key} != 'Магаданский ПСГ'">
+                                    </option>
+                                </select>
+                                <select name="fireObject" th:field="*{searchFormList[0].fireObject}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.categoriesMap.fireObjectsList}"
+                                            th:value="${pos}" th:text="${pos}">
+                                    </option>
+                                </select>
+                                <input type="submit" value="Поиск">
+                            </form>
+
+                            <form method="post" action="#" id="form2" th:object="${regionSearchFormWrapper}"
+                                  th:action="@{/regionEmergencyTripsSearch/search}">
+                                <p class="searchFormHeader">Поиск по категории и району выезда</p>
+                                <input type="datetime-local" name="start" th:field="*{searchFormList[1].start}">
+                                <input type="datetime-local" name="end" th:field="*{searchFormList[1].end}">
+                                <input hidden name="regionFormNumber" value="1">
+                                <select name="tripCategory" th:field="*{searchFormList[1].tripCategory}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.categoriesMap.emergencyTripsCategoriesList}"
+                                            th:value="${pos}" th:text="${pos}">
+                                    </option>
+                                </select>
+                                <select name="departureArea" th:field="*{searchFormList[1].departureArea}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.categoriesMap.divisionsRegionsList}"
+                                            th:value="${pos}" th:text="${pos}">
+                                    </option>
+                                </select>
+                                <input type="submit" value="Поиск">
+                            </form>
+
+                            <form method="post" action="#" id="form3" th:object="${regionSearchFormWrapper}"
+                                  th:action="@{/regionEmergencyTripsSearch/search}">
+                                <p class="searchFormHeader form3">Поиск по рангу пожара</p>
+                                <input type="datetime-local" name="start" th:field="*{searchFormList[2].start}">
+                                <input type="datetime-local" name="end" th:field="*{searchFormList[2].end}">
+                                <input hidden name="regionFormNumber" value="2">
+                                <select  name="garrison" th:field="*{searchFormList[2].garrison}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.garrisonSettlementsMap}"
+                                            th:value="${pos.key}" th:text="${pos.key}"
+                                            th:if="${pos.key} != 'Магаданский ПСГ'">
+                                    </option>
+                                </select>
+                                <select name="fireRank" th:field="*{searchFormList[2].fireRank}">
+                                    <option value="" selected></option>
+                                    <option value="1">1</option>
+                                    <option value="1 БИС">1 БИС</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                                <input type="submit" value="Поиск">
+                            </form>
+
+                            <form method="post" action="#" id="form5" th:object="${regionSearchFormWrapper}"
+                                  th:action="@{/regionEmergencyTripsSearch/search}">
+                                <p class="searchFormHeader">Поиск по категории и погибшим</p>
+                                <input type="datetime-local" name="start" th:field="*{searchFormList[4].start}">
+                                <input type="datetime-local" name="end" th:field="*{searchFormList[4].end}">
+                                <input hidden name="regionFormNumber" value="4">
+                                <select  name="garrison" th:field="*{searchFormList[4].garrison}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.garrisonSettlementsMap}"
+                                            th:value="${pos.key}" th:text="${pos.key}"
+                                            th:if="${pos.key} != 'Магаданский ПСГ'">
+                                    </option>
+                                </select>
+                                <select name="tripCategory" th:field="*{searchFormList[4].tripCategory}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.categoriesMap.emergencyTripsCategoriesList}"
+                                            th:value="${pos}" th:text="${pos}">
+                                    </option>
+                                </select>
+                                <input type="text" name="died" th:field="*{searchFormList[4].died}">
+                                <input type="submit" value="Поиск">
+                            </form>
+
+                            <form method="post" action="#" id="form6" th:object="${regionSearchFormWrapper}"
+                                  th:action="@{/regionEmergencyTripsSearch/search}">
+                                <p class="searchFormHeader">Поиск по категории и погибшим (>=)</p>
+                                <input type="datetime-local" name="start" th:field="*{searchFormList[5].start}">
+                                <input type="datetime-local" name="end" th:field="*{searchFormList[5].end}">
+                                <input hidden name="regionFormNumber" value="5">
+                                <select  name="garrison" th:field="*{searchFormList[5].garrison}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.garrisonSettlementsMap}"
+                                            th:value="${pos.key}" th:text="${pos.key}"
+                                            th:if="${pos.key} != 'Магаданский ПСГ'">
+                                    </option>
+                                </select>
+                                <select name="tripCategory" th:field="*{searchFormList[5].tripCategory}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.categoriesMap.emergencyTripsCategoriesList}"
+                                            th:value="${pos}" th:text="${pos}">
+                                    </option>
+                                </select>
+                                <input type="text" name="died" th:field="*{searchFormList[5].died}">
+                                <input type="submit" value="Поиск">
+                            </form>
+
+                            <form method="post" action="#" id="form7" th:object="${regionSearchFormWrapper}"
+                                  th:action="@{/regionEmergencyTripsSearch/search}">
+                                <p class="searchFormHeader">Поиск по категории и пострадавшим</p>
+                                <input type="datetime-local" name="start" th:field="*{searchFormList[6].start}">
+                                <input type="datetime-local" name="end" th:field="*{searchFormList[6].end}">
+                                <input hidden name="regionFormNumber" value="6">
+                                <select  name="garrison" th:field="*{searchFormList[6].garrison}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.garrisonSettlementsMap}"
+                                            th:value="${pos.key}" th:text="${pos.key}"
+                                            th:if="${pos.key} != 'Магаданский ПСГ'">
+                                    </option>
+                                </select>
+                                <select name="tripCategory" th:field="*{searchFormList[6].tripCategory}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.categoriesMap.emergencyTripsCategoriesList}"
+                                            th:value="${pos}" th:text="${pos}">
+                                    </option>
+                                </select>
+                                <input type="text" name="injured" th:field="*{searchFormList[6].injured}">
+                                <input type="submit" value="Поиск">
+                            </form>
+
+                            <form method="post" action="#" id="form8" th:object="${regionSearchFormWrapper}"
+                                  th:action="@{/regionEmergencyTripsSearch/search}">
+                                <p class="searchFormHeader">Поиск по категории и пострадавшим (>=)</p>
+                                <input type="datetime-local" name="start" th:field="*{searchFormList[7].start}">
+                                <input type="datetime-local" name="end" th:field="*{searchFormList[7].end}">
+                                <input hidden name="regionFormNumber" value="7">
+                                <select  name="garrison" th:field="*{searchFormList[7].garrison}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.garrisonSettlementsMap}"
+                                            th:value="${pos.key}" th:text="${pos.key}"
+                                            th:if="${pos.key} != 'Магаданский ПСГ'">
+                                    </option>
+                                </select>
+                                <select name="tripCategory" th:field="*{searchFormList[7].tripCategory}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.categoriesMap.emergencyTripsCategoriesList}"
+                                            th:value="${pos}" th:text="${pos}">
+                                    </option>
+                                </select>
+                                <input type="text" name="injured" th:field="*{searchFormList[7].injured}">
+                                <input type="submit" value="Поиск">
+                            </form>
+
+                            <form method="post" action="#" id="form9" th:object="${regionSearchFormWrapper}"
+                                  th:action="@{/regionEmergencyTripsSearch/search}">
+                                <p class="searchFormHeader form9">Поиск по кол/ву звеньев ГДЗС</p>
+                                <input type="datetime-local" name="start" th:field="*{searchFormList[8].start}">
+                                <input type="datetime-local" name="end" th:field="*{searchFormList[8].end}">
+                                <input hidden name="regionFormNumber" value="8">
+                                <select  name="garrison" th:field="*{searchFormList[8].garrison}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.garrisonSettlementsMap}"
+                                            th:value="${pos.key}" th:text="${pos.key}"
+                                            th:if="${pos.key} != 'Магаданский ПСГ'">
+                                    </option>
+                                </select>
+                                <input type="text" name="count" th:field="*{searchFormList[8].count}">
+                                <input type="submit" value="Поиск">
+                            </form>
+
+                            <form method="post" action="#" id="form10" th:object="${regionSearchFormWrapper}"
+                                  th:action="@{/regionEmergencyTripsSearch/search}">
+                                <p class="searchFormHeader">Поиск по кол/ву звеньев ГДЗС (>=)</p>
+                                <input type="datetime-local" name="start" th:field="*{searchFormList[9].start}">
+                                <input type="datetime-local" name="end" th:field="*{searchFormList[9].end}">
+                                <input hidden name="regionFormNumber" value="9">
+                                <select  name="garrison" th:field="*{searchFormList[9].garrison}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.garrisonSettlementsMap}"
+                                            th:value="${pos.key}" th:text="${pos.key}"
+                                            th:if="${pos.key} != 'Магаданский ПСГ'">
+                                    </option>
+                                </select>
+                                <input type="text" name="count" th:field="*{searchFormList[9].count}">
+                                <input type="submit" value="Поиск">
+                            </form>
+
+                            <form method="post" action="#" id="form11" th:object="${regionSearchFormWrapper}"
+                                  th:action="@{/regionEmergencyTripsSearch/search}">
+                                <p class="searchFormHeader">Поиск по кол/ву водяных стволов</p>
+                                <input type="datetime-local" name="start" th:field="*{searchFormList[10].start}">
+                                <input type="datetime-local" name="end" th:field="*{searchFormList[10].end}">
+                                <input hidden name="regionFormNumber" value="10">
+                                <select  name="garrison" th:field="*{searchFormList[10].garrison}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.garrisonSettlementsMap}"
+                                            th:value="${pos.key}" th:text="${pos.key}"
+                                            th:if="${pos.key} != 'Магаданский ПСГ'">
+                                    </option>
+                                </select>
+                                <input type="text" name="count" th:field="*{searchFormList[10].count}">
+                                <input type="submit" value="Поиск">
+                            </form>
+
+                            <form method="post" action="#" id="form12" th:object="${regionSearchFormWrapper}"
+                                  th:action="@{/regionEmergencyTripsSearch/search}">
+                                <p class="searchFormHeader">Поиск по кол/ву водяных стволов (>=)</p>
+                                <input type="datetime-local" name="start" th:field="*{searchFormList[11].start}">
+                                <input type="datetime-local" name="end" th:field="*{searchFormList[11].end}">
+                                <input hidden name="regionFormNumber" value="11">
+                                <select  name="garrison" th:field="*{searchFormList[11].garrison}">
+                                    <option value="" selected></option>
+                                    <option value=""
+                                            th:each="pos : ${application.garrisonSettlementsMap}"
+                                            th:value="${pos.key}" th:text="${pos.key}"
+                                            th:if="${pos.key} != 'Магаданский ПСГ'">
+                                    </option>
+                                </select>
+                                <input type="text" name="count" th:field="*{searchFormList[11].count}">
+                                <input type="submit" value="Поиск">
+                            </form>
+                        </div>
+                    </div>
+                    <form class="printTripsListHeader" method="post" action="#"
+                          th:action="@{/regionEmergencyTripsSearch/saveTripsList}">
+                        <p>Данные по пожарам</p>
+                        <input type="datetime-local" name="start">
+                        <input type="datetime-local" name="end">
+                        <input type="submit" value="Печать">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

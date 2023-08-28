@@ -1,17 +1,23 @@
 spring:
   jpa:
-    show-mysql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
-    hibernate:
-      ddl-auto: create
-    defer-datasource-initialization: true
+        dialect: org.hibernate.dialect.MySQLDialect
+        enable_lazy_load_no_trans: true
+        ddl-auto: none
   datasource:
-    url: jdbc:mysql://localhost:3306/trip_log
+    url: jdbc:mysql://localhost:3306/dispatchLog
     username: root
-    password: root
+    password: root112
     driver-class-name: com.mysql.cj.jdbc.Driver
-  sql:
-    init:
-      mode: always
+  security:
+    user:
+      name: cpps
+      password: cpps-spt-log-112
+server:
+  servlet:
+    contextPath: /cpps-log
+    application-display-name: cpps-log
+    session:
+      timeout: 960m
+pathToPrint: /home/vladimir/Desktop
