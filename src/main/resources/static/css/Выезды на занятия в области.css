@@ -1,3 +1,7 @@
+body {
+    background-color: #f0d29e;
+}
+
 div.header {
 	background-color: #E58F65;
 }
@@ -6,3 +10,6 @@ div.right_side {
 	border-color: #E58F65;
 }
 
+div.textField_trips2 tr:hover td {
+    background-color: rgba(229, 143, 101, 0.5);
+}

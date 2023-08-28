@@ -1,26 +1,26 @@
 @font-face {
-    font-family: Montserrat;
-    src: url(fonts/Montserrat/static/Montserrat-MediumItalic.ttf);
+    font-family: 'Roboto Flex';
+    src: url('../fonts/Roboto/Roboto-Regular.ttf');
+}
+
+body {
+    background-color: cornsilk;
 }
 
 .container {
-	padding: 50px 0;
-	border-radius: 8px;
-	margin: 50px auto;
-	background-color: buttonfield;
 	max-width: 600px;
+	height: 1080px;
+    margin-top: 8%;
 }
 
-.select {
+input,
+.duty_trips_info {
+	display: block;
 	height: 60px;
-	max-width: 400px;
+	width: 300px;
 	margin: 20px auto;
 	line-height: 60px;
 	text-align: center;
-}
-
-a {
-	display: block;
 	text-decoration: none;
 	color: #000;
 	font-size: 20px;
@@ -30,17 +30,61 @@ a {
 	background-color: rgba(0, 0, 0, 0.3);
 }
 
-a:hover {
+.duty_trips_info {
+    width: 590px;
+    display: flex;
+    height: 40px;
+    line-height: 40px;
+}
+
+.duty_trips_info * {
+     height: 40px;
+}
+
+#duty_date {
+    background-color: #fff;
+    border: none;
+    height: 100%;
+    border-radius: 0;
+    font-size: 18px;
+}
+
+.print_duty_info_icon {
+    width: 30px;
+    height: 30px;
+    margin-top: -5px;
+}
+
+.print_duty_info_button {
+    width: 48px;
+    margin: -1px 1px 0 0;
+    border-right: 0 solid #000;
+    border-radius: 0 8px 8px 0;
+}
+
+input:not(#duty_date):hover {
 	color: #0d6efd;
 	border: 1px solid #0d6efd;
 	box-shadow: 0 0 5px 2px #0d6efd;
 }
 
-a:active {
+input:not(#duty_date):active {
 	border-style: groove;
     color: #000;
     border: 2px solid #0d6efd;
     box-shadow: none;
+}
+
+.print_duty_info_button:hover {
+    border: 1px solid #0d6efd;
+    box-shadow: 0 0 3px 1px #0d6efd;
+    margin-left: 1px;
+}
+
+.print_duty_info_button:active {
+    border: 2px solid #0d6efd;
+    box-shadow: none;
+    margin-left: 1px;
 }
 
 

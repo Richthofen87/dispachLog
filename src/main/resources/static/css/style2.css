@@ -4,10 +4,9 @@
 }
 
 .container {
-    padding: 50px 0;
-    margin: 50px auto 50px auto;
     max-width: 600px;
     font-family: 'Roboto Flex', sans-serif;
+    margin-top: 8%;
 }
 
 h1 {
@@ -30,8 +29,7 @@ label, input {
     line-height: 35px;
 }
 
-.row > select,
-.row > input:nth-child(2) {
+.row > select {
     border-radius: 0 6px 6px 0;
     padding-left: 10px;
     border: 1px solid #000;
@@ -47,11 +45,6 @@ label, input {
     padding: 0;
     margin-top: 20px;
     background: none;
-}
-
-.row > input:nth-child(2).reset {
-    border-radius: 6px;
-    padding: 0;
 }
 
 a {
@@ -75,17 +68,24 @@ a {
     margin: 0 10px;
 }
 
-.button:hover,
-.row > input:nth-child(2).reset:hover {
+select {
+    font-style: italic;
+    font-size: 18px;
+}
+
+.button:hover {
     color: #0d6efd;
     border: 1px solid #0d6efd;
     box-shadow: 0 0 3px 1px #0d6efd;
 }
 
-.button:active,
-.row > input:nth-child(2).reset:active {
+.button:active {
     border-style: groove;
     color: #000;
     border: 2px solid #0d6efd;
     box-shadow: none;
+}
+
+.error {
+    color: red;
 }

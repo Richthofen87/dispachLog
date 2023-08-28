@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Оперативка</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/svg" href="../static/img/favicon.ico" th:href="@{/img/favicon.ico}">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/dutyTrips.css" th:href="@{/css/dutyTrips.css}">
+    <link rel="preload" href="../static/fonts/Roboto/Roboto-Medium.ttf" th:href="@{/fonts/Roboto/Roboto-Medium.ttf}"
+          as="font" crossorigin="anonymous">
+    <link rel="preload" href="../static/fonts/Roboto/Roboto-Regular.ttf" th:href="@{/fonts/Roboto/Roboto-Regular.ttf}"
+          as="font" crossorigin="anonymous">
+    <script th:src="@{/assets/js/jquery-3.7.0.min.js}"></script>
+    <script defer th:inline="javascript">
+        $(document).ready(function () {
+            var currDateTime = new Date();
+            var day = currDateTime.getDate();
+            var month = currDateTime.getMonth() + 1;
+            var year = currDateTime.getFullYear();
+            var hour = currDateTime.getHours();
+            var minute = currDateTime.getMinutes();
+            day = (day < 10) ? '0' + day : day;
+            month = (month < 10) ? '0' + month : month;
+            hour = (hour < 10) ? '0' + hour : hour;
+            minute = (minute < 10) ? '0' + minute : minute;
+            var date = year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
+            $('p span').text(date);
+        });
+
+
+
+    </script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="col" th:object="${emergenceTripsList}">
+        <p>ЦППС СПТ ФПС ГУ МЧС России по Магаданской области</p>
+        <p class="header">ОПЕРАТИВНАЯ СВОДКА</p>
+        <p th:inline="text">по выездам за дежурные сутки [[${date}]]</p>
+        <p class="date">Дата и время получения формы <span></span></p>
+        <table>
+            <tr>
+                <td class="first-col" rowspan="2">Территория</td>
+                <td rowspan="2" class="rotate">Кол. пожаров</td>
+                <td rowspan="2" class="rotate">Ущерб, тыс.р.</td>
+                <td rowspan="2" class="rotate">Спасено людей</td>
+                <td rowspan="2" class="rotate">Погибло людей</td>
+                <td rowspan="2" class="rotate">Пострадало людей</td>
+                <td colspan="7">Причины</td>
+                <td colspan="8">Объекты</td>
+            </tr>
+            <tr>
+                <td class="rotate">Поджог</td>
+                <td class="rotate">Эл.прич.</td>
+                <td class="rotate">Печное об/е</td>
+                <td class="rotate">Неост. обр.</td>
+                <td class="rotate">Шал. детей</td>
+                <td class="rotate">Неуст. причины</td>
+                <td class="rotate">Прочие</td>
+                <td class="rotate">Жилой сектор</td>
+                <td class="rotate">Новостройки</td>
+                <td class="rotate">Произв. ЗДиС</td>
+                <td class="rotate">Складские помещ.</td>
+                <td class="rotate">Торговые</td>
+                <td class="rotate">Админ. здания</td>
+                <td class="rotate">Сельхоз. ЗДиС</td>
+                <td class="rotate">Прочие</td>
+            </tr>
+            <tr>
+                <td class="first-col">Магадан</td>
+                <th:block th:object="${fireStatisticInfo}">
+                    <td th:text="*{countOfFires}">0</td>
+                    <td th:text="*{fireDamage}">0</td>
+                    <td th:text="*{rescued}">0</td>
+                    <td th:text="*{died}">0</td>
+                    <td th:text="*{injured}">0</td>
+                </th:block>
+                <th:block th:each="fireCause : ${fireStatisticCause}">
+                    <td th:text="${fireCause}"></td>
+                </th:block>
+                <th:block th:each="fireObject : ${fireStatisticObject}">
+                    <td th:text="${fireObject}"></td>
+                </th:block>
+            </tr>
+            <tr>
+                <td class="first-col">Область</td>
+                <th:block th:object="${regionFireStatisticInfo}">
+                    <td th:text="*{countOfFires}">0</td>
+                    <td th:text="*{fireDamage}">0</td>
+                    <td th:text="*{rescued}">0</td>
+                    <td th:text="*{died}">0</td>
+                    <td th:text="*{injured}">0</td>
+                </th:block>
+                <th:block th:each="fireCause : ${regionFireStatisticCause}">
+                    <td th:text="${fireCause}"></td>
+                </th:block>
+                <th:block th:each="fireObject : ${regionFireStatisticObject}">
+                    <td th:text="${fireObject}"></td>
+                </th:block>
+            </tr>
+            <tr>
+                <td class="first-col">Всего</td>
+                <td th:text="${fireStatisticInfo.countOfFires} + ${regionFireStatisticInfo.countOfFires}"></td>
+                <td th:text="${fireStatisticInfo.fireDamage} + ${regionFireStatisticInfo.fireDamage}"></td>
+                <td th:text="${fireStatisticInfo.rescued} + ${regionFireStatisticInfo.rescued}"></td>
+                <td th:text="${fireStatisticInfo.died} + ${regionFireStatisticInfo.died}"></td>
+                <td th:text="${fireStatisticInfo.injured} + ${regionFireStatisticInfo.injured}"></td>
+                <td th:text="${fireStatisticCause[0]} + ${regionFireStatisticCause[0]}"></td>
+                <td th:text="${fireStatisticCause[1]} + ${regionFireStatisticCause[1]}"></td>
+                <td th:text="${fireStatisticCause[2]} + ${regionFireStatisticCause[2]}"></td>
+                <td th:text="${fireStatisticCause[3]} + ${regionFireStatisticCause[3]}"></td>
+                <td th:text="${fireStatisticCause[4]} + ${regionFireStatisticCause[4]}"></td>
+                <td th:text="${fireStatisticCause[5]} + ${regionFireStatisticCause[5]}"></td>
+                <td th:text="${fireStatisticCause[6]} + ${regionFireStatisticCause[6]}"></td>
+                <td th:text="${fireStatisticObject[0]} + ${regionFireStatisticObject[0]}"></td>
+                <td th:text="${fireStatisticObject[1]} + ${regionFireStatisticObject[1]}"></td>
+                <td th:text="${fireStatisticObject[2]} + ${regionFireStatisticObject[2]}"></td>
+                <td th:text="${fireStatisticObject[3]} + ${regionFireStatisticObject[3]}"></td>
+                <td th:text="${fireStatisticObject[4]} + ${regionFireStatisticObject[4]}"></td>
+                <td th:text="${fireStatisticObject[5]} + ${regionFireStatisticObject[5]}"></td>
+                <td th:text="${fireStatisticObject[6]} + ${regionFireStatisticObject[6]}"></td>
+                <td th:text="${fireStatisticObject[7]} + ${regionFireStatisticObject[7]}"></td>
+            </tr>
+        </table>
+        <div class="tripDesc" th:each="trip,stat : ${emergencyTripsMap}">
+            <div th:object="${trip.key}">
+                <p class="tripDescHead" th:utext="|${stat.count}. *{settlement.garrison.name},
+            *{dateTime.toLocalDate()}, *{tripCategory.name} <br> *{settlement.name}, *{address}|"></p>
+                <p class="tripDescHead" th:text="*{checkOutTime} ? 'Время выезда: ' + *{checkOutTime} : 'Время сообщения: ' + *{messageTime}"></p>
+            </div>
+            <p th:utext="${trip.value}"></p>
+        </div>
+        <p th:inline="text">На пожарах работало: по г. Магадану - [[${carsAndStuffCount.cars}]] ед.тех.,
+            [[${carsAndStuffCount.stuff}]] чел.</p>
+        <div class="footer">
+            <p th:inline="text">Всего выездов за дежурные сутки по г. Магадану -> [[${countCityTrips}]]</p>
+            <p th:each="cat : ${cityTripsByCategoryMap}" th:text="|${cat.key}  ->  ${cat.value}|"></p>
+        </div>
+        <p>Оперативный дежурный Территориального ПСГ Магаданской области</p>
+        <select id="rank">
+            <option value="">звание</option>
+            <option value="">майор вн.службы</option>
+            <option value="">капитан вн.службы</option>
+            <option value="">ст.лейтенант вн.службы</option>
+        </select>
+        <select id="nds_spt">
+            <option value="">ФИО</option>
+            <option th:each="ndsSpt : ${application.categoriesMap.fioSptList}"
+                    th:value="${ndsSpt}" th:text="${ndsSpt}"></option>
+        </select>
+    </div>
+</div>
+</body>
+</html>
