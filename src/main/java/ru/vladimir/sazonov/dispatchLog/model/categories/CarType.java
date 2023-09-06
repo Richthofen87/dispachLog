@@ -1,7 +1,6 @@
 package ru.vladimir.sazonov.dispatchLog.model.categories;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 @Entity

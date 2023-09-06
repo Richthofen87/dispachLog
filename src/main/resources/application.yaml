@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/dispatchLog
     username: root
-    password: 123
+    password: root112
     driver-class-name: com.mysql.cj.jdbc.Driver
   security:
     user:
@@ -20,4 +20,4 @@ server:
     application-display-name: cpps-log
     session:
       timeout: 960m
-pathToPrint: /home/vladimir/Desktop
+pathToPrint: C:\Users\guestuser\Desktop

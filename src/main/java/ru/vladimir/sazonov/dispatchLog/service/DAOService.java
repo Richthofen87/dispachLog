@@ -152,29 +152,17 @@ public interface DAOService {
     Page<EmergencyTrips> findAllRegionTripsByGdzsCount(LocalDateTime start, LocalDateTime end, int gdzsCount, int pageNumber, int tripsCount);
 
     Page<EmergencyTrips> findAllRegionTripsByGdzsCountGraterThen(LocalDateTime start, LocalDateTime end, int gdzsCount, int pageNumber, int tripsCount);
-
     Page<EmergencyTrips> findAllRegionTripsByWaterBarrelsCount(LocalDateTime start, LocalDateTime end, int barrelsCount, int pageNumber, int tripsCount);
-
     Page<EmergencyTrips> findAllRegionTripsByWaterBarrelsCountGraterThen(LocalDateTime start, LocalDateTime end, int barrelsCount,
                                                                          int pageNumber, int tripsCount);
-
     FireStatisticInfo getCityStatisticInfo(LocalDate start, LocalDate end);
-
     List<FireStatisticCause> getCityStatisticCause(LocalDate start, LocalDate end);
-
     List<FireStatisticObject> getCityStatisticObject(LocalDate start, LocalDate end);
-
     FireStatisticInfo getRegionStatisticInfo(LocalDate start, LocalDate end);
-
     List<FireStatisticCause> getRegionStatisticCause(LocalDate start, LocalDate end);
-
     List<FireStatisticObject> getRegionStatisticObject(LocalDate start, LocalDate end);
-
     List<CarTypeInfo> getCarTypeInfo(int emergencyTripId, String division);
-
     List<StuffInfo> getStuffCount(int emergencyTripId);
-
     List<EmergencyTrips> findAllDutyTrips(LocalDate start, LocalDate end);
-
     CarsAndStuffCount getCarsAndStuffCount(LocalDate start, LocalDate end);
 }

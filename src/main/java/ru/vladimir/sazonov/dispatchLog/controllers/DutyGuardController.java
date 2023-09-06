@@ -33,8 +33,7 @@ public class DutyGuardController {
         if (dutyGuard.getNdsCuks().getName().isEmpty()) dutyGuard.setNdsCuks(null);
         if (dutyGuard.getSpndsSpt().getName().isEmpty()) dutyGuard.setSpndsSpt(null);
         if (dutyGuard.getCppsDispatcher().getName().isEmpty()) dutyGuard.setCppsDispatcher(null);
-        servletContext.setAttribute("dutyGuard", daoService.saveDutyGuard(dutyGuard));
-        System.out.println(servletContext.getAttribute("dutyGuard"));
+        System.out.println(daoService.saveDutyGuard(dutyGuard));
         return "redirect:/";
     }
 }

@@ -2,7 +2,6 @@ package ru.vladimir.sazonov.dispatchLog.model.categories;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 
 import java.util.List;
@@ -25,11 +24,4 @@ public class Settlements {
     @JsonIgnore
     @OneToMany(mappedBy = "settlement", fetch = FetchType.LAZY)
     private List<Divisions> divisionsList;
-
-
-//    @OneToMany(mappedBy = "settlement")
-//    private List<EmergencyTrips> emergencyTripsList;
-//
-//    @OneToMany(mappedBy = "settlement")
-//    private List<NonEmergencyTrips> nonEmergencyTripsList;
 }
