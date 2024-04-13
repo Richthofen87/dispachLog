@@ -1,1 +1,2 @@
 *.html linguist-language=Java
+*.java linguist-language=HTML
