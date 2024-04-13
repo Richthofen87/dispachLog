@@ -1,0 +1,55 @@
+version: '3.9'
+services:
+  dispatchLog:
+    image: dispatch_log_app:latest
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    secrets:
+      - security_user
+      - security_pwd
+      - mysql_user
+      - mysql_pwd
+    environment:
+      MYSQL_URL: jdbc:mysql://db:3306/dispatchLog
+      PATH_TO_PRINT: /home/vladimir/Desktop
+      WAIT_HOSTS: db:3306
+      WAIT_TIMEOUT: 30
+      WAIT_SLEEP_INTERVAL: 1
+      WAIT_HOST_CONNECT_TIMEOUT: 5
+    deploy:
+      update_config:
+        parallelism: 1
+        order: start-first
+        failure_action: rollback
+        delay: 10s
+      rollback_config:
+        parallelism: 0
+        order: stop-first
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+        window: 120s
+  db:
+    image: mysql:oracle
+    secrets:
+      - mysql_user
+      - mysql_pwd
+    environment:
+      MYSQL_DATABASE: dispatchLog
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_USER_FILE: /run/secrets/mysql_user
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_pwd
+    ports:
+      - '3306:3306'
+secrets:
+  mysql_user:
+    external: true
+  mysql_pwd:
+    external: true
+  security_user:
+    external: true
+  security_pwd:
+    external: true

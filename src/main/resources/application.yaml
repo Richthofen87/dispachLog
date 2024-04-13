@@ -4,20 +4,15 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
         enable_lazy_load_no_trans: true
-        ddl-auto: none
+    hibernate:
+      ddl-auto: update
   datasource:
-    url: jdbc:mysql://localhost:3306/dispatchLog
-    username: root
-    password: root112
+    url: ${MYSQL_URL}
     driver-class-name: com.mysql.cj.jdbc.Driver
-  security:
-    user:
-      name: cpps
-      password: cpps-spt-log-112
 server:
   servlet:
     contextPath: /cpps-log
     application-display-name: cpps-log
     session:
       timeout: 960m
-pathToPrint: /home/vladimir/Desktop
+path_to_print: ${PATH_TO_PRINT}

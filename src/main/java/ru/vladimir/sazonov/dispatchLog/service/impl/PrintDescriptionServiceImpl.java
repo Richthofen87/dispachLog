@@ -21,8 +21,8 @@ import java.util.List;
 @Data
 public class PrintDescriptionServiceImpl implements PrintDescriptionService {
 
-    @Value("${pathToPrint}")
-    private String pathToPrint;
+    @Value("${path_to_print}")
+    private String PATH_TO_PRINT;
 
     @Override
     public void printTripsList(List<EmergencyTrips> emergencyTrips, LocalDateTime start, LocalDateTime end, String region) {
@@ -44,7 +44,7 @@ public class PrintDescriptionServiceImpl implements PrintDescriptionService {
                     .append(trip.getDescript());
         }
         DateTimeFormatter localizedDateTime = DateTimeFormatter.ofPattern("HH ч. mm мин. dd-MM-yyyy");
-        Path path = Path.of(pathToPrint, date.format(DateTimeFormatter.ofPattern("yyyy")),
+        Path path = Path.of(PATH_TO_PRINT, date.format(DateTimeFormatter.ofPattern("yyyy")),
                 date.format(DateTimeFormatter.ofPattern("MM")),
                 date.format(DateTimeFormatter.ofPattern("dd")),
                 "Данные по пожарам " +
@@ -67,7 +67,7 @@ public class PrintDescriptionServiceImpl implements PrintDescriptionService {
         LocalDate date = LocalDate.now();
         String category = trip.getTripCategory().getName();
         String address = trip.getAddress();
-        Path path = Path.of(pathToPrint, date.format(DateTimeFormatter.ofPattern("yyyy")),
+        Path path = Path.of(PATH_TO_PRINT, date.format(DateTimeFormatter.ofPattern("yyyy")),
                 date.format(DateTimeFormatter.ofPattern("MM")),
                 date.format(DateTimeFormatter.ofPattern("dd")),
                 category + ", " + trip.getSettlement().getName() + ", " +
